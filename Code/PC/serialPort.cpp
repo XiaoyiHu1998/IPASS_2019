@@ -5,17 +5,17 @@ using std::endl;
 using std::cout;
 using std::cin;
 
-serialPort::serialPort(const char (&comPort)[4]):
-                                        comPort(comPort),
+serialPort::serialPort(char *portName):
+                                        portName(portName),
                                         hComm(NULL),
-                                        open(false),
+                                        connected(false),
                                         status(),
                                         errors()
                                         {}
 
 serialPort::~serialPort(){
-    if(open){
-        open  = false;
+    if(connected){
+        connected  = false;
         CloseHandle(hComm);
     }
 }
@@ -23,8 +23,8 @@ serialPort::~serialPort(){
 //open serial port connection
 void serialPort::open(const int nBaudRate){
     //connect through given port with CreateFile
-    hComm = CreateFile("\\\\.\\" + comPort,
-                        GENERIC_READ | GENERIC WRITE,
+    hComm = CreateFile( portName,
+                        GENERIC_READ | GENERIC_WRITE,
                         0,
                         NULL,
                         OPEN_EXISTING,
@@ -32,14 +32,14 @@ void serialPort::open(const int nBaudRate){
                         NULL);
 
     //connection success check
-    if(hComm == INVALID_HANDLE_VALUE){
+    if(this->hComm == INVALID_HANDLE_VALUE){
         //error
-        std::cout << "ERROR: serial port -> " << GetLastError() << endl;
+        std::cout << "ERROR: serial port INVALID_HANDLE_VALUE -> " << GetLastError() << endl;
     }
     else{
         //success
         std::cout << "Serial port open" << endl;
-        open = true;
+        connected = true;
 
         //try to set comm parameters
         DCB dcbSerialParams = {0};
@@ -54,7 +54,7 @@ void serialPort::open(const int nBaudRate){
             dcbSerialParams.BaudRate = nBaudRate;
             dcbSerialParams.ByteSize = 8;
             dcbSerialParams.StopBits = ONESTOPBIT;
-            dcbSerialParams.parity = NOPARITY;
+            dcbSerialParams.Parity = NOPARITY;
             //set DTR control to reset arduino if connection is made.
             dcbSerialParams.fDtrControl = DTR_CONTROL_DISABLE;
 
@@ -64,7 +64,7 @@ void serialPort::open(const int nBaudRate){
             }
             else{
                 //connected if everything is fine
-                this->open = true;
+                connected = true;
                 //flush buffer
                 PurgeComm(this->hComm, PURGE_RXCLEAR | PURGE_TXCLEAR);
                 //wait for arduino to reset for 2 seconds
@@ -75,27 +75,20 @@ void serialPort::open(const int nBaudRate){
 }
 
 void serialPort::close(){
-    if(open){
+    if(connected){
         CloseHandle(hComm);
-        open = false;
+        connected = false;
     }
 }
 
-void serialPort::changePort(const char & (&newPort)[4]){
-    if(!open){
-        comPort = newPort;
-        std::cout << "portChanged to " + comPort << endl;
-    }
-}
-
-int serialPort::read(const char *buffer, const unsigned int CharCount){
+int serialPort::read(char *buffer, const unsigned int charCount){
     //Number of bytes to read
     DWORD bytesRead;
     //amount of bytes asked to read
     unsigned int toRead;
 
     //get status info on port
-    ClearCommError(hcomm, &this->errors, &this->status);
+    ClearCommError(hComm, &this->errors, &this->status);
 
     //check for things available to read
     if(status.cbInQue > 0){
@@ -121,17 +114,17 @@ bool serialPort::write(const char *buffer, unsigned int charCount){
     DWORD bytesSent;
 
     //try to write buffer to port
-    if(WriteFile(hComm, &this->errors, &this->status)){
+    if(WriteFile(hComm, (void*)buffer, charCount, &bytesSent, 0)){
         return true;
     }
     else{
         //get Comm error
-        ClearCommError(hComm, (void *)buffer, charCount, &bytesSent, 0)
+        ClearCommError(hComm, &this->errors, &this->status);
         return false;
     }
 }
 
-bool serialPort::isOpen(){
+bool serialPort::isConnected(){
     //return connection status
-    return open;
+    return connected;
 }

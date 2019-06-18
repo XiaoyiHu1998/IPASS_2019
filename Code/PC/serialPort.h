@@ -7,20 +7,19 @@
 
 class serialPort{
 private:
-    char comPort[4];
+    char *portName;
     HANDLE hComm;
-    bool open;
+    bool connected;
     COMSTAT status;
     DWORD errors;
 public:
-    serialPort(const char (&comPort)[4]);
+    serialPort(char *portName);
     ~serialPort();
     void open(const int nBaudRate);
     void close();
-    void changePort(const char (&newPort)[4]);
-    int read(const char *buffer, const unsigned int CharCount);
+    int read(char *buffer, const unsigned int CharCount);
     bool write(const char *buffer, unsigned int charCount);
-    bool isOpen();
+    bool isConnected();
 };
 
 #endif //SERIALPORT_H
