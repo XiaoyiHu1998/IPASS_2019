@@ -7,13 +7,13 @@ int main(){
 
     while(1){
         hwlib::cin >> input;
-        if(input = 'a'){
-            for(int i  0; i < 5; i++){
-                Pin.write(1);
+        if(input == 'a'){
+            for(int i = 0; i < 5; i++){
+                pin.write(1);
                 pin.flush();
                 hwlib::wait_ms(200);
                 pin.write(0);
-                pin.flush()
+                pin.flush();
                 hwlib::wait_ms(200);
             }
             
