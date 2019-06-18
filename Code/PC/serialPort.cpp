@@ -1,12 +1,24 @@
 #include "serialPort.h"
+#include <iostream>
 
-serialPort::serialPort(const char[4] & comPort):
+using std::endl;
+using std::cout;
+using std::cin;
+
+serialPort::serialPort(const char (&comPort)[4]):
                                         comPort(comPort),
                                         hComm(NULL),
                                         open(false),
                                         status(),
                                         errors()
                                         {}
+
+serialPort::~serialPort(){
+    if(open){
+        open  = false;
+        CloseHandle(hComm);
+    }
+}
 
 //open serial port connection
 void serialPort::open(const int nBaudRate){
@@ -62,13 +74,6 @@ void serialPort::open(const int nBaudRate){
     }
 }
 
-serialPort::~serialPort(){
-    if(open){
-        open  = false;
-        CloseHandle(hComm);
-    }
-}
-
 void serialPort::close(){
     if(open){
         CloseHandle(hComm);
@@ -76,21 +81,21 @@ void serialPort::close(){
     }
 }
 
-void serialPort:changePort(const char[4] & newPort){
+void serialPort::changePort(const char & (&newPort)[4]){
     if(!open){
         comPort = newPort;
         std::cout << "portChanged to " + comPort << endl;
     }
 }
 
-int serialPort::read(const char & *buffer, const unsigned int CharCount){
+int serialPort::read(const char *buffer, const unsigned int CharCount){
     //Number of bytes to read
     DWORD bytesRead;
     //amount of bytes asked to read
     unsigned int toRead;
 
     //get status info on port
-    ClearCommError(hcomm. &this->errors, &this->status);
+    ClearCommError(hcomm, &this->errors, &this->status);
 
     //check for things available to read
     if(status.cbInQue > 0){
@@ -112,14 +117,16 @@ int serialPort::read(const char & *buffer, const unsigned int CharCount){
     return 0;
 }
 
-bool serialPort::write(const char & *buffer, unsigned int charCount){
-    DWORD bytesSend;
+bool serialPort::write(const char *buffer, unsigned int charCount){
+    DWORD bytesSent;
 
     //try to write buffer to port
     if(WriteFile(hComm, &this->errors, &this->status)){
         return true;
     }
     else{
+        //get Comm error
+        ClearCommError(hComm, (void *)buffer, charCount, &bytesSent, 0)
         return false;
     }
 }
