@@ -21,12 +21,14 @@ int main(){
                 pin.write(0);
                 pin.flush();
                 hwlib::wait_ms(100);
-    }
+            }
 
     while(1){
         hwlib::cin >> input;
         if(input == 'a'){
-            blink(pin, 100);
+            for (int x = 1; x < 6; x++){
+                blink(pin, x * 100);
+            }
         }
         hwlib::wait_ms(500);
     }
