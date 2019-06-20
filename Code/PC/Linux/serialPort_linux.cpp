@@ -24,7 +24,7 @@ serialPort_linux::serialPort_linux(char* path){
 
     //read in existing settings into termios struct
     if(tcgetattr(port, &tty) != 0){
-        printf("Error %i from tcgetattr while reading in existing values: %s\n", errno, strerror(errno));
+        printf("ERROR %i from tcgetattr while reading in existing values: %s\n", errno, strerror(errno));
     }
     //control flags
     tty.c_cflag |= PARENB;          //clears parity bit, disabling it (more common)
@@ -32,7 +32,7 @@ serialPort_linux::serialPort_linux(char* path){
     tty.c_cflag |= CS8  ;            //8 bits per byte
     tty.c_cflag &= ~CRTSCTS;        //disables hardware RTS/CTS control flow
     tty.c_cflag |= CREAD | CLOCAL;  //turns on read and ignores ctrl lines (Clocal = 1)
-    
+    tty.c_cflag &= ~HUPCL;          //TUrn iff hangup to prevent reset on read wite switch
     //local flags
     tty.c_lflag &= ~ICANON;    //sets non-canonical mode
     tty.c_lflag &= ECHO;       //disables echo

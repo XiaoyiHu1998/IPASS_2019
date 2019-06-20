@@ -6,10 +6,16 @@ int main(){
     char character = 'c';
     // std::cout << "Please enter the path of of your serial port: ";
     // std::cin >> path;
+    std::cout << path << std::endl;
     serialPort_linux port(path);
 
     while(1){
-        std::cout << port.writeData("a", 1);
-        sleep(2);
+        std::cout << "Enter a to blink: ";
+        std::cin >> character;
+        for(;;){
+            if(character == 'a'){
+                std::cout << port.writeData("a", 1);
+            }
+        }
     }
 }
