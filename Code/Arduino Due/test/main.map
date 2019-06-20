@@ -1059,7 +1059,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 [!provide]                        PROVIDE (__ram_size = __ram_size)
                 [!provide]                        PROVIDE (__ram_end = __ram_end)
 
-.text           0x0000000000000000      0x758
+.text           0x0000000000000000      0x764
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __text_start = .
                 [!provide]                        PROVIDE (__text_start = __text_start)
@@ -1123,69 +1123,69 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x0000000000000296       0x22 main.o
                 0x0000000000000296                blink(due::pin_out, int)
  .text.startup.main
-                0x00000000000002b8       0x64 main.o
+                0x00000000000002b8       0x70 main.o
                 0x00000000000002b8                main
  .text.__startup
-                0x000000000000031c       0x48 bmptk_cortex.o
-                0x000000000000031c                __startup
- .text          0x0000000000000364       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
-                0x0000000000000364                __aeabi_uldivmod
- .text          0x0000000000000394      0x2d0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
-                0x0000000000000394                __udivmoddi4
- .text          0x0000000000000664        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_dvmd_tls.o)
-                0x0000000000000664                __aeabi_ldiv0
-                0x0000000000000668                . = ALIGN (0x4)
+                0x0000000000000328       0x48 bmptk_cortex.o
+                0x0000000000000328                __startup
+ .text          0x0000000000000370       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
+                0x0000000000000370                __aeabi_uldivmod
+ .text          0x00000000000003a0      0x2d0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+                0x00000000000003a0                __udivmoddi4
+ .text          0x0000000000000670        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_dvmd_tls.o)
+                0x0000000000000670                __aeabi_ldiv0
+                0x0000000000000674                . = ALIGN (0x4)
  *(.glue_7t .glue_7)
- .glue_7        0x0000000000000668        0x0 linker stubs
- .glue_7t       0x0000000000000668        0x0 linker stubs
-                0x0000000000000668                . = ALIGN (0x4)
+ .glue_7        0x0000000000000674        0x0 linker stubs
+ .glue_7t       0x0000000000000674        0x0 linker stubs
+                0x0000000000000674                . = ALIGN (0x4)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata._ZN3due8pin_infoENS_4pinsE.str1.1
-                0x0000000000000668       0x39 hwlib.o
+                0x0000000000000674       0x39 hwlib.o
  .rodata._ZZN3due8pin_infoENS_4pinsEE14pin_info_array
-                0x00000000000006a1       0xa4 hwlib.o
- *fill*         0x0000000000000745        0x3 
+                0x00000000000006ad       0xa4 hwlib.o
+ *fill*         0x0000000000000751        0x3 
  .rodata._ZTVN3due7pin_outE
-                0x0000000000000748       0x10 main.o
-                0x0000000000000748                vtable for due::pin_out
-                0x0000000000000758                . = ALIGN (0x4)
+                0x0000000000000754       0x10 main.o
+                0x0000000000000754                vtable for due::pin_out
+                0x0000000000000764                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000000758                . = ALIGN (0x4)
+                0x0000000000000764                . = ALIGN (0x4)
  *(.gcc_except_table)
-                0x0000000000000758                . = ALIGN (0x4)
+                0x0000000000000764                . = ALIGN (0x4)
  *(.eh_frame_hdr)
-                0x0000000000000758                . = ALIGN (0x4)
+                0x0000000000000764                . = ALIGN (0x4)
  *(.eh_frame)
-                0x0000000000000758                . = ALIGN (0x4)
-                0x0000000000000758                __text_end = .
+                0x0000000000000764                . = ALIGN (0x4)
+                0x0000000000000764                __text_end = .
                 [!provide]                        PROVIDE (__text_end = __text_end)
 
-.vfp11_veneer   0x0000000000000758        0x0
- .vfp11_veneer  0x0000000000000758        0x0 linker stubs
+.vfp11_veneer   0x0000000000000764        0x0
+ .vfp11_veneer  0x0000000000000764        0x0 linker stubs
 
-.v4_bx          0x0000000000000758        0x0
- .v4_bx         0x0000000000000758        0x0 linker stubs
+.v4_bx          0x0000000000000764        0x0
+ .v4_bx         0x0000000000000764        0x0 linker stubs
 
-.iplt           0x0000000000000758        0x0
- .iplt          0x0000000000000758        0x0 hwlib.o
+.iplt           0x0000000000000764        0x0
+ .iplt          0x0000000000000764        0x0 hwlib.o
 
 .IF_YOU_SEE_THIS_YOU_HAVE_ONE_OR_MORE_GLOBAL_OBJECT_CONSTRUCTORS
  *(.init)
  *(.preinit_array)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
-                0x0000000000000758                . = ALIGN (0x4)
-                0x0000000000000758                __exidx_start = .
+                0x0000000000000764                . = ALIGN (0x4)
+                0x0000000000000764                __exidx_start = .
                 [!provide]                        PROVIDE (__exidx_start = __exidx_start)
 
-.ARM.exidx      0x0000000000000758        0x8
+.ARM.exidx      0x0000000000000764        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0000000000000758        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x0000000000000764        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
 
-.rel.dyn        0x0000000000000760        0x0
- .rel.iplt      0x0000000000000760        0x0 hwlib.o
-                0x0000000000000760                . = ALIGN (0x4)
-                0x0000000000000760                __exidx_end = .
+.rel.dyn        0x000000000000076c        0x0
+ .rel.iplt      0x000000000000076c        0x0 hwlib.o
+                0x000000000000076c                . = ALIGN (0x4)
+                0x000000000000076c                __exidx_end = .
                 [!provide]                        PROVIDE (__exidx_end = __exidx_end)
 
 .bss            0x0000000020000000    0x12010
@@ -1222,9 +1222,9 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x0000000020012010                __bss_end = .
                 [!provide]                        PROVIDE (__bss_end = __bss_end)
 
-.data           0x0000000020012010        0x8 load address 0x0000000000000760
+.data           0x0000000020012010        0x8 load address 0x000000000000076c
                 0x0000000020012010                . = ALIGN (0x4)
-                0x0000000000000760                __data_init_start = LOADADDR (.data)
+                0x000000000000076c                __data_init_start = LOADADDR (.data)
                 [!provide]                        PROVIDE (__data_init_start = __data_init_start)
                 0x0000000020012010                __data_start = .
                 [!provide]                        PROVIDE (__data_start = __data_start)
@@ -1239,13 +1239,13 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x0000000020012018                . = ALIGN (0x4)
                 0x0000000020012018                __data_end = .
                 [!provide]                        PROVIDE (__data_end = __data_end)
-                0x0000000000000760                __data_init_end = LOADADDR (.data)
+                0x000000000000076c                __data_init_end = LOADADDR (.data)
                 [!provide]                        PROVIDE (__data_init_end = __data_init_end)
                 [!provide]                        PROVIDE (__data_size = (__data_end - __data_start))
                 [!provide]                        PROVIDE (__data_init_size = __data_size)
                 [!provide]                        PROVIDE (__data_init_end = (__data_init_start + __data_init_size))
 
-.igot.plt       0x0000000020012018        0x0 load address 0x0000000000000768
+.igot.plt       0x0000000020012018        0x0 load address 0x0000000000000774
  .igot.plt      0x0000000020012018        0x0 hwlib.o
                 0x0000000020012018                . = ALIGN (0x4)
                 0x0000000020012018                __heap_start = .

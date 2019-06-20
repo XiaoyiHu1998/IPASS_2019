@@ -4,10 +4,10 @@ namespace target = hwlib::target;
 void blink(target::pin_out pin, int time){
     pin.write(1);
     pin.flush();
-    hwlib::wait_ms(time);
+    hwlib::wait_us(time);
     pin.write(0);
     pin.flush();
-    hwlib::wait_ms(time);
+    hwlib::wait_us(time);
 }
 
 int main(){
@@ -17,18 +17,18 @@ int main(){
     for(int i = 0; i < 5; i++){
                 pin.write(1);
                 pin.flush();
-                hwlib::wait_ms(500);
+                hwlib::wait_us(5);
                 pin.write(0);
                 pin.flush();
-                hwlib::wait_ms(100);
+                hwlib::wait_us(5);
     }
 
     while(1){
         hwlib::cin >> input;
         if(input == 'a'){
-            blink(pin, 100);
+            blink(pin, 5);
         }
-        hwlib::wait_ms(500);
+        hwlib::wait_us(1);
     }
     
 }
