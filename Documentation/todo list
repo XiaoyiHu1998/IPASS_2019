@@ -1,0 +1,55 @@
+due_remote:
+    struct:
+        ad_pin_info_type
+
+    classes:
+        d2_36kHz
+            d2_kHz()
+            write()
+        pin_adc
+            pin_adc(uint32_t channel)
+            pin_adc(ad_pins name)
+            adc_value_type read()
+            void refresh()
+        pin_in
+            pin_in(uint32_t port_number, uint32_t pin_number)
+            pin_in(pins name)
+            void pullup_disable()
+            void pullup_enable()
+            bool read()
+            refresh()
+        pin_in_out
+            pin_in_out(uint32_r port_number, uint32_t pin_number)
+            pin_in_out(pins name)
+            void direction_set_input()
+            bool read()
+            void direction_set_output()
+            void write(bool v)
+            void flush()
+            void refresh()
+            void direction_flush()
+        pin_oc
+            pin_oc(uint32_r port_number, uint32_t pin_number)
+            pin_oc(pins name)
+            bool read()
+            void write()
+            void flush()
+            void refresh()
+        pin_out
+            pin_out(uint32_r port_number, uint32_t pin_number)
+            pin_out(pins name)
+            void write(bool v)
+            flush()
+            
+    enumeration:
+        ad_pins
+        pins
+
+    functions:
+        now_ticks()
+        ticks_per_us()
+        uart_char_available()
+        uart_getC(): std::cin
+        uart_putC(): std::cout
+
+Timings:
