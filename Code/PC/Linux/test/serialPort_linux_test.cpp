@@ -10,12 +10,11 @@ int main(){
     serialPort_linux port(path);
 
     while(1){
-        std::cout << "Enter a to blink: ";
-        std::cin >> character;
+        // std::cout << "Enter a to blink: ";
+        // std::cin >> character;
         for(;;){
-            if(character == 'a'){
-                std::cout << port.writeData("a", 1);
-            }
+            usleep(1000);
+            std::cout << port.writeData("a", 1);
         }
     }
 }
