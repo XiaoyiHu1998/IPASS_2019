@@ -1,11 +1,11 @@
-#include "serialPort.h"
+#include "serialPort.h_windows"
 #include <iostream>
 
 using std::endl;
 using std::cout;
 using std::cin;
 
-serialPort::serialPort(char *portName):
+serialPort__windows::serialPort_windows(char *portName):
                                         portName(portName),
                                         hComm(NULL),
                                         connected(false),
@@ -13,7 +13,7 @@ serialPort::serialPort(char *portName):
                                         errors()
                                         {}
 
-serialPort::~serialPort(){
+serialPort_windows::~serialPort_windows(){
     if(connected){
         connected  = false;
         CloseHandle(hComm);
@@ -21,7 +21,7 @@ serialPort::~serialPort(){
 }
 
 //open serial port connection
-void serialPort::open(const int nBaudRate){
+void serialPort_windows::open(const int nBaudRate){
     //connect through given port with CreateFile
     hComm = CreateFile( portName,
                         GENERIC_READ | GENERIC_WRITE,
@@ -74,14 +74,14 @@ void serialPort::open(const int nBaudRate){
     }
 }
 
-void serialPort::close(){
+void serialPort_windows::close(){
     if(connected){
         CloseHandle(hComm);
         connected = false;
     }
 }
 
-int serialPort::read(char *buffer, const unsigned int charCount){
+int serialPort_windows::read(char *buffer, const unsigned int charCount){
     //Number of bytes to read
     DWORD bytesRead;
     //amount of bytes asked to read
@@ -124,7 +124,7 @@ bool serialPort::write(const char *buffer, unsigned int charCount){
     }
 }
 
-bool serialPort::isConnected(){
+bool serialPort_windows::isConnected(){
     //return connection status
     return connected;
 }
