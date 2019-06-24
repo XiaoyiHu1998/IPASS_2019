@@ -67,7 +67,7 @@ serialPort_linux::~serialPort_linux(){
     close(port);
 }
 
-bool serialPort_linux::writeData(const void* message, const size_t size){
+bool serialPort_linux::writeChar(const char message, const size_t size){
     int bytesWritten = write(port, message, size);
 
     if(bytesWritten < 0){
@@ -77,6 +77,36 @@ bool serialPort_linux::writeData(const void* message, const size_t size){
         return true;
     }
 }
+
+bool serialPort_linux::writeInt(const uint8_t message, const size_t size){
+    int bytesWritten = write(port, message, size);
+
+    if(bytesWritten < 0){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+template<unsigned int N> bool serialPort_linux::writeArray(const std::array<char, N> & message){
+        unsigned int bytesWritten = 0;
+        while(bytesWritten < N){
+        int bytesSent = write(port, message.data() + bytesWritten, N - bytesWritten);
+        if(bytesSent < 0){
+            std::cout << "ERROR: bytes could not be sent." << std::endl;
+        }
+        else{
+            bytesWritten += static_cast<unsigned int>(bytesSent);
+            }
+            if(bytesWritten < 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
 
 void serialPort_linux::readData(char* & readBuffer, const size_t toRead){
     //allocate memmory for readBuffer

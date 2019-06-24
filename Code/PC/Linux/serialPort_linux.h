@@ -20,9 +20,14 @@ public:
     serialPort_linux(char* path);
     ~serialPort_linux();
 
-    //writes size amount of chars in message to serial port,
-    //returns amount sent, or < 0 if error occured
-    bool writeData(const void* message, const size_t size);
+    //send char over serial port
+    bool serialPort_linux::writeChar(const char message, const size_t size);
+
+    //send uint8_t over serial port
+    bool serialPort_linux::writeInt(const uint8_t message, const size_t size);
+
+    //writes char array with size N over serial port
+    template<unsigned int N> bool writeArray(const std::array<char, N> & message);
 
     void readData(char* & readBuffer, const size_t toRead);
 };
