@@ -3,216 +3,131 @@
 
 namespace target = hwlib::target;
 
-target::pin_in_out pins[54] = {
-                                    target::pin_in_out(target::pins::d0),
-                                    target::pin_in_out(target::pins::d1),
-                                    target::pin_in_out(target::pins::d2),
-                                    target::pin_in_out(target::pins::d3),
-                                    target::pin_in_out(target::pins::d4),
-                                    
-                                    target::pin_in_out(target::pins::d5),
-                                    target::pin_in_out(target::pins::d6),
-                                    target::pin_in_out(target::pins::d7),
-                                    target::pin_in_out(target::pins::d8),
-                                    target::pin_in_out(target::pins::d9),
-                                    
-                                    target::pin_in_out(target::pins::d10),
-                                    target::pin_in_out(target::pins::d11),
-                                    target::pin_in_out(target::pins::d12),
-                                    target::pin_in_out(target::pins::d13),
-                                    target::pin_in_out(target::pins::d14),
-                                    
-                                    target::pin_in_out(target::pins::d15),
-                                    target::pin_in_out(target::pins::d16),
-                                    target::pin_in_out(target::pins::d17),
-                                    target::pin_in_out(target::pins::d18),
-                                    target::pin_in_out(target::pins::d19),
-                                    
-                                    target::pin_in_out(target::pins::d20),
-                                    target::pin_in_out(target::pins::d21),
-                                    target::pin_in_out(target::pins::d22),
-                                    target::pin_in_out(target::pins::d23),
-                                    target::pin_in_out(target::pins::d24),
-                                    
-                                    target::pin_in_out(target::pins::d25),
-                                    target::pin_in_out(target::pins::d26),
-                                    target::pin_in_out(target::pins::d27),
-                                    target::pin_in_out(target::pins::d28),
-                                    target::pin_in_out(target::pins::d29),
-                                    
-                                    target::pin_in_out(target::pins::d30),
-                                    target::pin_in_out(target::pins::d31),
-                                    target::pin_in_out(target::pins::d32),
-                                    target::pin_in_out(target::pins::d33),
-                                    target::pin_in_out(target::pins::d34),
-                                    
-                                    target::pin_in_out(target::pins::d35),
-                                    target::pin_in_out(target::pins::d36),
-                                    target::pin_in_out(target::pins::d37),
-                                    target::pin_in_out(target::pins::d38),
-                                    target::pin_in_out(target::pins::d39),
-                                    
-                                    target::pin_in_out(target::pins::d40),
-                                    target::pin_in_out(target::pins::d41),
-                                    target::pin_in_out(target::pins::d42),
-                                    target::pin_in_out(target::pins::d43),
-                                    target::pin_in_out(target::pins::d44),
-                                    
-                                    target::pin_in_out(target::pins::d45),
-                                    target::pin_in_out(target::pins::d46),
-                                    target::pin_in_out(target::pins::d47),
-                                    target::pin_in_out(target::pins::d48),
-                                    target::pin_in_out(target::pins::d49),
-                                    
-                                    target::pin_in_out(target::pins::d50),
-                                    target::pin_in_out(target::pins::d51),
-                                    target::pin_in_out(target::pins::d52),
-                                    target::pin_in_out(target::pins::d53)
-                                };
-
-duePins duePins(pins);
-
-char getNextParamter(){
-    char parameter;
-    hwlib::cin >> parameter;
-
-    return parameter;
+char getNextChar(){
+    return hwlib::cin.getc();
 }
 
-int main(){
+uint8_t getPinNumber(){
+    return static_cast<uint8_t>(hwlib::cin.getc());
+}
+
+void toggle(duePins & pins, uint8_t pin, bool & on){
+    if(on){
+        pins.write(pin, 0);
+        on = 0;
+    }
+    else{
+        pins.write(pin, 1);
+        on = 1;
+    }
+}
+
+void blink(duePins & pins, uint8_t pin, bool & on){
+    pins.write(pin ,1);
+    hwlib::wait_ms(100);
+    pins.write(pin ,0);
+    hwlib::wait_ms(100);
+}
+
+void checkStartByte(duePins & IO, bool on2, bool on3){
     while(1){
-        char classChar;
-        char function;
-        hwlib::cin >> classChar;
-        hwlib::cin >> function;
+        toggle(IO, 7, on2);
+        if(getPinNumber() == 200){
+            toggle(IO, 2, on3);
+            break;
+        }
+    }
+}
+
+void checkEndByte(){
+    while(1){
+        if(getPinNumber() == 210){
+            break;
+        }
+    }
+}
+
+void initialBlink(duePins & IO, bool on){
+    for(int i =0; i < 4; i++){
+        blink(IO, 53, on);
+        hwlib::wait_ms(100);
+    }
+}
+
+
+
+int main(){
+    duePins IO;
+    
+    bool on = 0;
+    bool on2 = 0;
+    bool on3 = 0;
+
+    char classChar;
+    char functionChar;
+    uint8_t pinNumber;
+    char writeValue;
+
+    IO.setOutput(53);
+    IO.setOutput(2);
+    IO.setOutput(7);
+    IO.setOutput(8);
+
+    initialBlink(IO, on);
+
+
+    while(1){
+        checkStartByte(IO, on2, on3);
+        classChar = getNextChar();
 
         switch(classChar){
-            //ad_pin_type_info
-            case '1':
-            //d2_36kHz
-            case '2':
-            //pin_adc
-            case '3':
-            //pin_in
-            case '4':
-                // switch(function){
-                //     //constructor call, enable pin as input
-                //     case 'c':
-                //         setPinIO(1);
-                    
-                //     //pin_in.pullup_disable()
-                //     case '1':
-                        
-
-                //     //pin_in.pullup_enable()
-                //     case '2':
-
-                //     //pin_in.read()
-                //     case '3':
-
-                //     //pin_in.refresh()
-                //     case '4':
-
-                // }
-
-            //pin_in_out
             case '5':
-                int pinNumber = 0;
+                functionChar = getNextChar();
+                pinNumber = getPinNumber();
 
-                switch(function){
+                switch(functionChar){
                     //setOutput()
                     case '1':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
-
-                        duePins.setOutput(pinNumber);
+                        IO.setOutput(pinNumber);
+                        break;
 
                     //setInput()
                     case '2':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
-
-                        duePins.setInput(pinNumber);
+                        IO.setInput(pinNumber);
+                        break;
 
                     //write()
                     case '3':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
+                        writeValue = getNextChar();
 
-                        if(getNextParamter() == '1'){
-                            duePins.write(pinNumber, 1);
+                        if(writeValue == 'a'){
+                            IO.write(pinNumber, 1);
+                            IO.flush(pinNumber);
                         }
                         else{
-                            duePins.write(pinNumber, 0);
+                            IO.write(pinNumber, 0);
+                            IO.flush(pinNumber);
                         }
+                        break;
 
                     //read()
                     case '4':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
-
-                        hwlib::cout << duePins.read(pinNumber);
+                        hwlib::cout << IO.read(pinNumber);
+                        break;
 
                     //flush()
                     case '5':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
-
-                        duePins.flush(pinNumber);
+                        IO.flush(pinNumber);
+                        break;
 
                     //refresh()
                     case '6':
-                        for(unsigned int i = 0; i < 6; i++){
-                            char value = getNextParamter();
-                            
-                            pinNumber += int (value);
-                        }
-
-                        duePins.refresh(pinNumber);
+                        IO.refresh(pinNumber);
+                        break;
                 }
 
-            //pin_oc
-            case '6':
-            //pin_out
-            case '7':
-                // switch(function){
-                //     //Constructor call, enable pin as output
-                //     case 'c':
-
-                //     //pin_out.write()
-                //     case '1':
-
-                //     //pin_out.flush()
-                //     case '2':
-                // }
-            case '8':
-            case '9':
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            default:
-                continue;
-
+            checkEndByte();
+            break;
         }
-    }
-
-    
+    } 
 }

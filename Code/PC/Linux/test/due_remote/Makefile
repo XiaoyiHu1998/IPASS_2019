@@ -9,16 +9,15 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES :=
+SOURCES := /home/xiaoyi/Desktop/IPASS_2019/Code/PC/Linux/serialPort_linux.cpp
 
 # header files in this project
-HEADERS := duePins.h
+HEADERS := /home/xiaoyi/Desktop/IPASS_2019/Code/hwlib/hwlib-arduino-due-remote.hpp
 
 # other places to look for files for this project
-SEARCH  :=
+SEARCH  := 
 
-# set BMPTK to the next higher directory and defer to the Makefile.due
 # set RELATIVE to the next higher directory 
 # and defer to the Makefile.* there
 RELATIVE := /home/xiaoyi/v1oopc-examples
-include $(RELATIVE)/Makefile.due
+include $(RELATIVE)/Makefile.native

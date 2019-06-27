@@ -11,7 +11,7 @@ int main(){
         // std::cin >> character;
         for(;;){
             usleep(1000);
-            std::cout << port.writeData("a", 1);
+            std::cout << port.writeChar('a', 1);
         }
     }
 }

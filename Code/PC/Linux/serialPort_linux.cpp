@@ -1,4 +1,4 @@
-#include "serialPort_linux.h"
+#include "serialPort_linux.hpp"
 
 serialPort_linux::serialPort_linux(char* path){
     port = open(path, O_RDWR);
@@ -29,10 +29,10 @@ serialPort_linux::serialPort_linux(char* path){
     //control flags
     tty.c_cflag |= PARENB;          //clears parity bit, disabling it (more common)
     tty.c_cflag &= ~CSTOPB;         //clears stop field, only one stop bit
-    tty.c_cflag |= CS8  ;            //8 bits per byte
+    tty.c_cflag |= CS8;             //8 bits per byte
     tty.c_cflag &= ~CRTSCTS;        //disables hardware RTS/CTS control flow
     tty.c_cflag |= CREAD | CLOCAL;  //turns on read and ignores ctrl lines (Clocal = 1)
-    tty.c_cflag &= ~HUPCL;          //TUrn iff hangup to prevent reset on read wite switch
+    // tty.c_cflag &= ~HUPCL;       //TUrn off hangup to prevent reset on read wite switch
     //local flags
     tty.c_lflag &= ~ICANON;    //sets non-canonical mode
     tty.c_lflag &= ECHO;       //disables echo
@@ -42,7 +42,7 @@ serialPort_linux::serialPort_linux(char* path){
 
     //input flags
     tty.c_iflag &= ~(IXON | IXOFF | IXANY);                                        //disables s/w flow control
-    tty.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);    //disable handling of recieved bytes
+    tty.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL);   //disable handling of recieved bytes
 
     //output mode flags
     tty.c_oflag &= ~OPOST; //prevent special interpretaion of bytes
@@ -68,7 +68,7 @@ serialPort_linux::~serialPort_linux(){
 }
 
 bool serialPort_linux::writeChar(const char message, const size_t size){
-    int bytesWritten = write(port, message, size);
+    int bytesWritten = write(port, &message, size);
 
     if(bytesWritten < 0){
         return false;
@@ -79,7 +79,7 @@ bool serialPort_linux::writeChar(const char message, const size_t size){
 }
 
 bool serialPort_linux::writeInt(const uint8_t message, const size_t size){
-    int bytesWritten = write(port, message, size);
+    int bytesWritten = write(port, &message, size);
 
     if(bytesWritten < 0){
         return false;
@@ -89,34 +89,15 @@ bool serialPort_linux::writeInt(const uint8_t message, const size_t size){
     }
 }
 
-template<unsigned int N> bool serialPort_linux::writeArray(const std::array<char, N> & message){
-        unsigned int bytesWritten = 0;
-        while(bytesWritten < N){
-        int bytesSent = write(port, message.data() + bytesWritten, N - bytesWritten);
-        if(bytesSent < 0){
-            std::cout << "ERROR: bytes could not be sent." << std::endl;
-        }
-        else{
-            bytesWritten += static_cast<unsigned int>(bytesSent);
-            }
-            if(bytesWritten < 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-    }
+// void serialPort_linux::readData(char* buffer, const size_t toRead){
+//     //allocate memmory for readBuffer
+//     char readBuffer;
+//     // memset(&readBuffer, '\0', sizeof(readBuffer));
 
-void serialPort_linux::readData(char* & readBuffer, const size_t toRead){
-    //allocate memmory for readBuffer
-    char buffer[2];
-    memset(&readBuffer, '\0', sizeof(readBuffer));
+//     int amountRead = read(port, &readBuffer, sizeof(readBuffer));
+//     if(amountRead < 0){
+//         std::cout << "ERROR: error while reading serial port" << std::endl;
+//     }
 
-    int amountRead = read(port, &readBuffer, sizeof(readBuffer));
-    if(amountRead < 0){
-        std::cout << "ERROR: error while reading serial port" << std::endl;
-    }
-
-    readBuffer = buffer;
-}
+//     &buffer = readBuffer;
+// }
