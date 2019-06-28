@@ -105,10 +105,11 @@ public:
         direction[pin] = 1;
     }
 
-    bool read(int pin){
+    uint8_t read(int pin){
         if(direction[pin] != 1){
             setInput(pin);
         }
+        
         return pins[pin].read();
     }
 

@@ -49,7 +49,7 @@ void checkEndByte(){
 
 void initialBlink(duePins & IO, bool on){
     for(int i =0; i < 4; i++){
-        blink(IO, 53, on);
+        blink(IO, 6, on);
         hwlib::wait_ms(100);
     }
 }
@@ -68,10 +68,10 @@ int main(){
     uint8_t pinNumber;
     char writeValue;
 
-    IO.setOutput(53);
-    IO.setOutput(2);
-    IO.setOutput(7);
-    IO.setOutput(8);
+    // IO.setOutput(53);
+    // IO.setOutput(2);
+    // IO.setOutput(7);
+    // IO.setOutput(8);
 
     initialBlink(IO, on);
 
@@ -112,6 +112,7 @@ int main(){
 
                     //read()
                     case '4':
+                        IO.refresh(pinNumber);
                         hwlib::cout << IO.read(pinNumber);
                         break;
 
