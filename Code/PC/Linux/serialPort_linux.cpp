@@ -32,7 +32,8 @@ serialPort_linux::serialPort_linux(char* path){
     tty.c_cflag |= CS8;             //8 bits per byte
     tty.c_cflag &= ~CRTSCTS;        //disables hardware RTS/CTS control flow
     tty.c_cflag |= CREAD | CLOCAL;  //turns on read and ignores ctrl lines (Clocal = 1)
-    // tty.c_cflag &= ~HUPCL;       //TUrn off hangup to prevent reset on read wite switch
+    tty.c_cflag &= ~HUPCL;       //Turn off hangup to prevent reset on read wite switch
+    
     //local flags
     tty.c_lflag &= ~ICANON;    //sets non-canonical mode
     tty.c_lflag &= ECHO;       //disables echo
@@ -89,15 +90,13 @@ bool serialPort_linux::writeInt(const uint8_t message, const size_t size){
     }
 }
 
-// void serialPort_linux::readData(char* buffer, const size_t toRead){
-//     //allocate memmory for readBuffer
-//     char readBuffer;
-//     // memset(&readBuffer, '\0', sizeof(readBuffer));
+bool serialPort_linux::readBool(uint8_t buffer, const size_t toRead){
+    
+    int amountRead = read(port, &buffer, sizeof(buffer));
+    std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
+    if(amountRead < 0){
+        std::cout << "ERROR: error while reading serial port" << std::endl;
+    }
 
-//     int amountRead = read(port, &readBuffer, sizeof(readBuffer));
-//     if(amountRead < 0){
-//         std::cout << "ERROR: error while reading serial port" << std::endl;
-//     }
-
-//     &buffer = readBuffer;
-// }
+    return static_cast<bool>(buffer);
+}
