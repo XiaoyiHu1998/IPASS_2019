@@ -44,7 +44,7 @@ public:
         }
     }
 
-    bool readBool(uint8_t buffer, const size_t toRead);
+    bool readBool();
 
     // //reads N amount of bools from serial port.
     // template<unsigned int N> 

@@ -90,13 +90,28 @@ bool serialPort_linux::writeInt(const uint8_t message, const size_t size){
     }
 }
 
-bool serialPort_linux::readBool(uint8_t buffer, const size_t toRead){
-    
+bool serialPort_linux::readBool(){
+    char buffer;
     int amountRead = read(port, &buffer, sizeof(buffer));
     std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
     if(amountRead < 0){
         std::cout << "ERROR: error while reading serial port" << std::endl;
     }
 
-    return static_cast<bool>(buffer);
+    switch(buffer){
+        case '1':
+            return true;
+            break;
+        case '0':
+            return false;
+            break;
+        case 'e':
+            std::cout << "Error: serial port did not return expected bool values, 'e' recieved";
+            return false;
+            break;
+        default:
+            std::cout << "Error: serial port did not return expected bool values, unkown value recieved";
+            return false;
+            break;
+    }
 }
