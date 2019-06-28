@@ -32,7 +32,7 @@ serialPort_linux::serialPort_linux(char* path){
     tty.c_cflag |= CS8;             //8 bits per byte
     tty.c_cflag &= ~CRTSCTS;        //disables hardware RTS/CTS control flow
     tty.c_cflag |= CREAD | CLOCAL;  //turns on read and ignores ctrl lines (Clocal = 1)
-    tty.c_cflag &= ~HUPCL;       //Turn off hangup to prevent reset on read wite switch
+    // tty.c_cflag &= ~HUPCL;       //Turn off hangup to prevent reset on read wite switch
     
     //local flags
     tty.c_lflag &= ~ICANON;    //sets non-canonical mode

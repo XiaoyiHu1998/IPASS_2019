@@ -13,28 +13,28 @@ int main(){
         pin.write(1);
         // pin.flush();
         std::cout << "on" << std::endl;
-        hwlib::wait_ms(200);
+        hwlib::wait_ms(28);
 
         pin3.refresh();
-        hwlib::wait_ms(200);
+        hwlib::wait_ms(28);
         if(pin3.read()){
-            hwlib::wait_ms(200);
+            hwlib::wait_ms(28);
             pin2.write(1);
             // pin2.flush();
             std::cout << "!on" << std::endl;
         }
         else{
-            hwlib::wait_ms(200);
+            hwlib::wait_ms(28);
             pin2.write(0);
             // pin2.flush();
             std::cout << "!off" << std::endl;
         }
-        hwlib::wait_ms(500);
+        hwlib::wait_ms(28);
 
         pin.write(0);
         // pin.flush();
         std::cout << "off" << std::endl << std::endl;
-        hwlib::wait_ms(500);
+        hwlib::wait_ms(28);
 
     }
 }
