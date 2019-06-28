@@ -105,12 +105,20 @@ public:
         direction[pin] = 1;
     }
 
-    uint8_t read(int pin){
+    char read(int pin){
         if(direction[pin] != 1){
             setInput(pin);
         }
         
-        return pins[pin].read();
+        if(pins[pin].read()){
+            return '1';
+        }
+        else if(!pins[pin].read()){
+            return '0';
+        }
+        else{
+            return 'e';
+        }
     }
 
     void flush(int pin){
