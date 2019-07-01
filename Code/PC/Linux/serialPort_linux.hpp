@@ -46,6 +46,8 @@ public:
 
     bool readBool();
 
+    char readChar();
+
     // //reads N amount of bools from serial port.
     // template<unsigned int N> 
     // bool writeArray(const std::array<char, N> & message){

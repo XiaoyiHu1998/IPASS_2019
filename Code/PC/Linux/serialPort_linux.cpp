@@ -115,3 +115,14 @@ bool serialPort_linux::readBool(){
             break;
     }
 }
+
+char serialPort_linux::readChar(){
+    char buffer;
+    int amountRead = read(port, &buffer, sizeof(buffer));
+    std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
+    if(amountRead < 0){
+        std::cout << "ERROR: error while reading serial port" << std::endl;
+    }
+
+    return buffer;
+}
