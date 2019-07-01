@@ -5,13 +5,17 @@
 
 namespace target = hwlib::target;
 
+union adc_data{
+    uint8_t uint8[2];
+    uint16_t uint16;
+};
 
-class duePins{
+class in_out_pins{
 private:
     target::pin_in_out pins[54];
     uint8_t direction[54];
 public:
-    duePins():
+    in_out_pins():
         pins {
             target::pin_in_out(target::pins::d0),
             target::pin_in_out(target::pins::d1),
@@ -127,6 +131,41 @@ public:
 
     void refresh(int pin){
         pins[pin].refresh();
+    }
+};
+
+class adc_pins{
+private:
+    target::pin_adc pins[12];
+public:
+    adc_pins():
+                pins{
+                    target::pin_adc(target::ad_pins::a0),
+                    target::pin_adc(target::ad_pins::a1),
+                    target::pin_adc(target::ad_pins::a2),
+                    target::pin_adc(target::ad_pins::a3),
+                    target::pin_adc(target::ad_pins::a4),
+
+                    target::pin_adc(target::ad_pins::a5),
+                    target::pin_adc(target::ad_pins::a6),
+                    target::pin_adc(target::ad_pins::a7),
+                    target::pin_adc(target::ad_pins::a8),
+                    target::pin_adc(target::ad_pins::a9),
+
+                    target::pin_adc(target::ad_pins::a10),
+                    target::pin_adc(target::ad_pins::a11)
+                }
+                {}
+
+    void read(int pin){
+        adc_data reading;
+        reading.uint16 = static_cast<uint16_t>(pins[pin - 54].read());
+        hwlib::cout << static_cast<char>(reading.uint8[0]);
+        hwlib::cout << static_cast<char>(reading.uint8[1]);
+    }
+
+    void refresh(int pin){
+        pins[pin - 54].refresh();
     }
 };
 
