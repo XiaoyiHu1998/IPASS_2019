@@ -58,15 +58,7 @@ protected:
 };
 
 class remote_pin_in_out : public pin{
-public:
-   virtual void write(bool v){}
-   virtual bool read(){return 0;}
-   virtual void flush(){}
-   virtual void refresh(){}
-};
-
-class pin_in_out : public remote_pin_in_out{
-private:
+protected:
    pins number;
 
    void selectClass() override {
@@ -78,6 +70,14 @@ private:
       std::cout << static_cast<uint16_t>(number) << ", ";
    }
 
+public:
+   virtual void write(bool v){}
+   virtual bool read(){return 0;}
+   virtual void flush(){}
+   virtual void refresh(){}
+};
+
+class pin_in_out : public remote_pin_in_out{
 public:
    pin_in_out(pins ENUMber){
                         number = ENUMber;
@@ -128,18 +128,6 @@ public:
 
 
 class pin_out : public remote_pin_in_out{
-private:
-   pins number;
-
-   void selectClass(){
-      serialPort.writeChar('1', 1);
-   }
-
-   void selectPin(){
-      serialPort.writeInt(number, 1);
-      std::cout << static_cast<uint16_t>(number) << ", ";
-   }
-
 public:
    pin_out(pins ENUMber){
                         number = ENUMber;
@@ -170,18 +158,6 @@ public:
 };
 
 class pin_in : public remote_pin_in_out{
-private:
-   pins number;
-
-   void selectClass() override {
-      serialPort.writeChar('1', 1);
-   }
-
-   void selectPin() override {
-      serialPort.writeInt(number, 1);
-      std::cout << static_cast<uint16_t>(number) << ", ";
-   }
-
 public:
    pin_in(pins ENUMber){
                         number = ENUMber;
