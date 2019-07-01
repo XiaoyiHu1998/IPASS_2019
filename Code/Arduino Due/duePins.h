@@ -3,6 +3,28 @@
 
 #include "hwlib.hpp"
 
+
+
+void sendAck(){
+    hwlib::cout << 'k';
+}
+
+void waitForAck(){
+    char acknowledge;
+    for(;;){
+        hwlib::cin >> acknowledge;
+        if(acknowledge == 'k'){
+            break;
+        }
+    }
+}
+
+void sendInitAck(){
+    sendAck();
+    waitForAck();
+}
+
+
 namespace target = hwlib::target;
 
 union adc_data{
@@ -117,11 +139,8 @@ public:
         if(pins[pin].read()){
             return '1';
         }
-        else if(!pins[pin].read()){
-            return '0';
-        }
         else{
-            return 'e';
+            return '0';
         }
     }
 
@@ -159,14 +178,17 @@ public:
 
     void read(int pin){
         adc_data reading;
-        reading.uint16 = static_cast<uint16_t>(pins[pin - 54].read());
+        reading.uint16 = static_cast<uint16_t>(pins[pin].read());
         hwlib::cout << static_cast<char>(reading.uint8[0]);
+        waitForAck();
         hwlib::cout << static_cast<char>(reading.uint8[1]);
+        waitForAck();
     }
 
     void refresh(int pin){
-        pins[pin - 54].refresh();
+        pins[pin].refresh();
     }
 };
+
 
 #endif //DUE_PINS_HPP

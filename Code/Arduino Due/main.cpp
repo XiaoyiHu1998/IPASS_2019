@@ -29,11 +29,9 @@ void blink(in_out_pins & pins, uint8_t pin, bool & on){
     hwlib::wait_ms(100);
 }
 
-void checkStartByte(in_out_pins & GPIO, bool on2, bool on3){
+void checkStartByte(){
     while(1){
-        toggle(GPIO, 7, on2);
         if(getPinNumber() == 200){
-            toggle(GPIO, 2, on3);
             break;
         }
     }
@@ -49,43 +47,43 @@ void checkEndByte(){
 
 void initialBlink(in_out_pins & GPIO, bool on){
     for(int i =0; i < 4; i++){
-        blink(GPIO, 6, on);
+        blink(GPIO, 50, on);
         hwlib::wait_ms(100);
     }
 }
 
+void updateChar(char & commandChar){
+    commandChar = getNextChar();
+    sendAck();
+}
 
+void updateInt(uint8_t & pinNumber){
+    pinNumber = getPinNumber();
+    sendAck();
+}
 
 int main(){
     in_out_pins GPIO;
     adc_pins ADIO;
     
     bool on = 0;
-    bool on2 = 0;
-    bool on3 = 0;
-
     char classChar;
     char functionChar;
     uint8_t pinNumber;
     char writeValue;
-
-    // GPIO.setOutput(53);
-    // GPIO.setOutput(2);
-    // GPIO.setOutput(7);
-    // GPIO.setOutput(8);
-
+    
     initialBlink(GPIO, on);
-
+    sendInitAck();
 
     while(1){
-        checkStartByte(GPIO, on2, on3);
-        classChar = getNextChar();
+        checkStartByte();
+        updateChar(classChar);
 
         switch(classChar){
             //pin_in_out, pin_in, pin_out
             case '1':
-                functionChar = getNextChar();
-                pinNumber = getPinNumber();
+                updateChar(functionChar);
+                updateInt(pinNumber);
 
                 switch(functionChar){
                     //setOutput()
@@ -100,7 +98,7 @@ int main(){
 
                     //write()
                     case '3':
-                        writeValue = getNextChar();
+                        updateChar(writeValue);
 
                         if(writeValue == 'a'){
                             GPIO.write(pinNumber, 1);
@@ -116,6 +114,7 @@ int main(){
                     case '4':
                         GPIO.refresh(pinNumber);
                         hwlib::cout << GPIO.read(pinNumber);
+                        waitForAck();
                         break;
 
                     //flush()
@@ -129,10 +128,13 @@ int main(){
                         break;
                 }
 
+                break;
+
             //pin_adc
             case '2':
-                functionChar = getNextChar();
-                pinNumber = getPinNumber();
+                updateChar(functionChar);
+                updateInt(pinNumber);
+
                 switch(functionChar){
                     //read
                     case '1':
@@ -141,11 +143,11 @@ int main(){
 
                     //refresh
                     case '2':
+                        ADIO.refresh(pinNumber);
                         break;
                 }
+
                 break;
-            checkEndByte();
-            break;
         }
     } 
 }
