@@ -132,7 +132,7 @@ private:
    pins number;
 
    void selectClass(){
-      serialPort.writeChar('5', 1);
+      serialPort.writeChar('1', 1);
    }
 
    void selectPin(){
@@ -174,7 +174,7 @@ private:
    pins number;
 
    void selectClass() override {
-      serialPort.writeChar('5', 1);
+      serialPort.writeChar('1', 1);
    }
 
    void selectPin() override {
