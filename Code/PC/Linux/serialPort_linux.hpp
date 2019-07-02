@@ -44,6 +44,27 @@ public:
         }
     }
 
+    bool readBool();
+    char readChar();
+    uint8_t readInt();
+
+    // //reads N amount of bools from serial port.
+    // template<unsigned int N> 
+    // bool writeArray(const std::array<char, N> & message){
+    //     unsigned int bytesWritten = 0;
+    //     while(bytesWritten < N){
+    //         int bytesSent = write(port, message.data() + bytesWritten, N - bytesWritten);
+    //         if(bytesSent < 0){
+    //             std::cout << "ERROR: bytes could not be sent." << std::endl;
+    //             return false;
+    //         }
+    //         else{
+    //             bytesWritten += static_cast<unsigned int>(bytesSent);
+    //             return true;
+    //         }
+    //     }
+    // }
+
     // void readData(char* readBuffer, const size_t toRead);
 };
 
