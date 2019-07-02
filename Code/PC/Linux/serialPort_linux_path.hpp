@@ -1,0 +1,1 @@
+char path[13] = "/dev/ttyUSB0";

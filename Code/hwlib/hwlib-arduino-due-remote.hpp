@@ -2,11 +2,22 @@
 #define HWLIB_ARDUINO_DUE_REMOTE_H
 
 #include "/home/xiaoyi/Desktop/IPASS_2019/Code/PC/Linux/serialPort_linux.hpp"
+#include "/home/xiaoyi/Desktop/IPASS_2019/Code/PC/Linux/serialPort_linux_path.hpp"
 
-char path[13] = "/dev/ttyUSB0";
 serialPort_linux serialPort(path);
 
 namespace due_remote{
+
+void waitForStartSignal(){
+   std::cout << "waiting for startSignal" << std::endl << std::endl;
+   char startupSignal;
+   for(;;){
+      startupSignal = serialPort.readChar();
+      if(startupSignal == 's'){
+         break;
+      }
+   }
+}
 
 enum pins : uint8_t {
    d0, d1, d2, d3, d4, d5, d6, d7, d8, d9,
@@ -89,7 +100,7 @@ public:
       selectClass();
       serialPort.writeChar('4', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
       return serialPort.readBool();
       
    }
@@ -99,7 +110,7 @@ public:
       selectClass();
       serialPort.writeChar('6', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
    }
 
    void write(bool v) override {
@@ -114,7 +125,7 @@ public:
       else{
          serialPort.writeInt('b', 1);
       }
-      sendEndByte();
+      // sendEndByte();
    }
 
    void flush() override {
@@ -122,7 +133,7 @@ public:
       selectClass();
       serialPort.writeChar('5', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
    }
 };
 
@@ -145,7 +156,7 @@ public:
       else{
          serialPort.writeInt('b', 1);
       }
-      sendEndByte();
+      // sendEndByte();
    }
 
    void flush() override {
@@ -153,7 +164,7 @@ public:
       selectClass();
       serialPort.writeChar('5', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
    }
 };
 
@@ -169,7 +180,7 @@ public:
       selectClass();
       serialPort.writeChar('4', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
       return serialPort.readBool();
       
    }
@@ -179,7 +190,7 @@ public:
       selectClass();
       serialPort.writeChar('6', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
    }
 };
 
@@ -210,7 +221,7 @@ public:
       reading.uint8[0] = static_cast<uint8_t>(serialPort.readChar());
       reading.uint8[1] = static_cast<uint8_t>(serialPort.readChar());
       return reading.uint16;
-      sendEndByte();
+      // sendEndByte();
    }
 
    void refresh(){
@@ -218,7 +229,7 @@ public:
       selectClass();
       serialPort.writeChar('2', 1);
       selectPin();
-      sendEndByte();
+      // sendEndByte();
    }
 };
 
