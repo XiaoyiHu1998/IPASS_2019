@@ -132,6 +132,10 @@ public:
     void refresh(int pin){
         pins[pin].refresh();
     }
+
+    void flushDirection(int pin){
+        pins[pin].direction_flush();
+    }
 };
 
 class adc_pins{

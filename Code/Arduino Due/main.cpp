@@ -128,6 +128,10 @@ int main(){
                     case '6':
                         GPIO.refresh(pinNumber);
                         break;
+
+                    //direction_flush()
+                    case '7':
+                        GPIO.flushDirection(pinNumber);
                 }
                 break;
 
@@ -143,6 +147,7 @@ int main(){
 
                     //refresh
                     case '2':
+                        ADIO.refresh(pinNumber);
                         break;
                 }
                 break;
