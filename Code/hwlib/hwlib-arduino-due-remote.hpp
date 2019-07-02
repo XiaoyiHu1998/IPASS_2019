@@ -6,7 +6,52 @@
 
 serialPort_linux serialPort(path);
 
+//======================================================================
+
+namespace due_remote_primitives{
+
+class pin_in_out{
+public:
+   virtual void direction_set_output() = 0;
+   virtual void direction_set_input() = 0;
+   virtual void direction_flush() = 0;
+   virtual bool read() = 0;
+   virtual void refresh() = 0;
+   virtual void write(bool v) = 0;
+   virtual void flush() = 0;
+};
+
+class pin_out{
+public:
+   virtual void write(bool v) = 0;
+   virtual void flush() = 0;
+};
+
+class pin_in{
+public:
+   virtual bool read() = 0;
+   virtual void refresh() = 0;
+};
+
+class pin_oc{
+   virtual bool read() = 0;
+   virtual void write(bool v) = 0;
+   virtual void flush() = 0;
+   virtual void refresh() = 0;
+};
+
+class pin_adc{
+   virtual uint16_t read() = 0;
+   virtual void refresh() = 0;
+};
+
+};
+
+//======================================================================
+
 namespace due_remote{
+
+//======================================================================
 
 void waitForStartSignal(){
    std::cout << "waiting for startSignal" << std::endl << std::endl;
@@ -18,6 +63,8 @@ void waitForStartSignal(){
       }
    }
 }
+
+//======================================================================
 
 enum pins : uint8_t {
    d0, d1, d2, d3, d4, d5, d6, d7, d8, d9,
@@ -37,6 +84,8 @@ enum pins : uint8_t {
 
    sck, miso, mosi, cs0, cs1,
 
+   dummy_in_out, dummy_in, dummy_out,
+
    /// \cond INTERNAL    
    SIZE_THIS_IS_NOT_A_PIN
    /// \endcond   
@@ -48,54 +97,70 @@ enum adc_pins : uint8_t{
    AD_SIZE_THIS_IS_NOT_A_PIN
 };
 
+//======================================================================
+
 union adc_data{
     uint8_t uint8[2];
     uint16_t uint16;
 };
 
-class pin{
-protected:
-   virtual void selectClass() = 0;
+//======================================================================
 
-   virtual void selectPin() = 0;
+class pin_in_out_dummy : public due_remote_primitives::pin_in_out{
+public:
+   virtual void direction_set_output(){}
+   virtual void direction_set_input(){}
+   virtual void direction_flush(){}
+   virtual bool read(){return 0;}
+   virtual void refresh(){}
+   virtual void write(bool v){}
+   virtual void flush(){}
+};
+
+class pin_in_out : public due_remote_primitives::pin_in_out{
+private:
+   pins number;
+
+   void selectClass(){
+      serialPort.writeChar('1', 1);
+   }
+
+   void selectPin(){
+      serialPort.writeInt(number, 1);
+      std::cout << static_cast<uint16_t>(number) << ", ";
+   }
 
    void sendStartByte(){
       serialPort.writeInt(200, 1);
    }
 
-   void sendEndByte(){
-      serialPort.writeInt(210, 1);
-   }
-};
-
-class remote_pin_in_out : public pin{
-protected:
-   pins number;
-
-   void selectClass() override {
-      serialPort.writeChar('1', 1);
-   }
-
-   void selectPin() override {
-      serialPort.writeInt(number, 1);
-      std::cout << static_cast<uint16_t>(number) << ", ";
-   }
-
-public:
-   virtual void write(bool v){}
-   virtual bool read(){return 0;}
-   virtual void flush(){}
-   virtual void refresh(){}
-};
-
-class pin_in_out : public remote_pin_in_out{
 public:
    pin_in_out(pins ENUMber){
                         number = ENUMber;
                         }
 
-   bool read() override {
-      
+   void direction_set_output() override{
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('1', 1);
+      selectPin();
+   }
+   
+   void direction_set_input() override{
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('2', 1);
+      selectPin();
+   }
+
+   void direction_flush() override{
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('7', 1);
+      selectPin();
+   }
+
+   bool read() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('4', 1);
@@ -105,7 +170,7 @@ public:
       
    }
 
-   void refresh() override {
+   void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
@@ -113,7 +178,7 @@ public:
       // sendEndByte();
    }
 
-   void write(bool v) override {
+   void write(bool v) override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('3', 1);
@@ -128,23 +193,46 @@ public:
       // sendEndByte();
    }
 
-   void flush() override {
+   void flush() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('5', 1);
       selectPin();
       // sendEndByte();
    }
+
 };
 
+class pin_out_dummy : public due_remote_primitives::pin_out{
+public:
+   virtual void write(bool v){}
 
-class pin_out : public remote_pin_in_out{
+   virtual void flush(){}
+};
+
+class pin_out : public due_remote_primitives::pin_out{
+private:
+   pins number;
+
+   void selectClass(){
+      serialPort.writeChar('1', 1);
+   }
+
+   void selectPin(){
+      serialPort.writeInt(number, 1);
+      std::cout << static_cast<uint16_t>(number) << ", ";
+   }
+
+   void sendStartByte(){
+      serialPort.writeInt(200, 1);
+   }
+
 public:
    pin_out(pins ENUMber){
                         number = ENUMber;
                         }
 
-   void write(bool v) override {
+   void write(bool v) override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('3', 1);
@@ -168,14 +256,37 @@ public:
    }
 };
 
-class pin_in : public remote_pin_in_out{
+
+class pin_in_dummy : public due_remote_primitives::pin_in{
+public:
+   virtual bool read(){return 0;}
+
+   virtual void refresh(){}
+};
+
+class pin_in : public due_remote_primitives::pin_in{
+private:
+   pins number;
+
+   void selectClass(){
+      serialPort.writeChar('1', 1);
+   }
+
+   void selectPin(){
+      serialPort.writeInt(number, 1);
+      std::cout << static_cast<uint16_t>(number) << ", ";
+   }
+
+   void sendStartByte(){
+      serialPort.writeInt(200, 1);
+   }
+   
 public:
    pin_in(pins ENUMber){
                         number = ENUMber;
                         }
 
-   bool read() override {
-      
+   bool read() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('4', 1);
@@ -185,7 +296,7 @@ public:
       
    }
 
-   void refresh() override {
+   void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
@@ -194,7 +305,24 @@ public:
    }
 };
 
-class pin_adc : public pin{
+class pin_oc_dummy : public due_remote_primitives::pin_oc{
+public:
+   bool read() override {return 0;}
+
+   void write(bool v) override {}
+
+   void flush() override {}
+
+   void refresh() override{}
+};
+
+class pin_adc_dummy : due_remote_primitives::pin_adc{
+public:
+   uint16_t read() override {return 0;}
+   void refresh() override {}
+};
+
+class pin_adc : public due_remote_primitives::pin_adc{
 private:
    adc_pins number;
 
@@ -207,12 +335,16 @@ private:
       std::cout << static_cast<uint16_t>(number) << ", ";
    }
 
+   void sendStartByte(){
+      serialPort.writeInt(200, 1);
+   }
+
 public:
    pin_adc(adc_pins ENUMber){
       number = ENUMber;
    }
 
-   uint16_t read(){
+   uint16_t read() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('1', 1);
@@ -224,7 +356,7 @@ public:
       // sendEndByte();
    }
 
-   void refresh(){
+   void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('2', 1);
@@ -232,6 +364,59 @@ public:
       // sendEndByte();
    }
 };
+
+//======================================================================
+
+pin_out_dummy in_out_dummy;
+
+class all_from_pin_out_t : due_remote_primitives::pin_out{
+private:
+   static constexpr int max_pins = 16; 
+   due_remote_primitives::pin_out * pins[max_pins];
+public:
+   all_from_pin_out_t(
+                        due_remote_primitives::pin_out & p0 = in_out_dummy,
+                        due_remote_primitives::pin_out & p1 = in_out_dummy,
+                        due_remote_primitives::pin_out & p2 = in_out_dummy,
+                        due_remote_primitives::pin_out & p3 = in_out_dummy,
+                        
+                        due_remote_primitives::pin_out & p4 = in_out_dummy,
+                        due_remote_primitives::pin_out & p5 = in_out_dummy,
+                        due_remote_primitives::pin_out & p6 = in_out_dummy,
+                        due_remote_primitives::pin_out & p7 = in_out_dummy,
+                        
+                        due_remote_primitives::pin_out & p8 = in_out_dummy,
+                        due_remote_primitives::pin_out & p9 = in_out_dummy,
+                        due_remote_primitives::pin_out & p10 = in_out_dummy,
+                        due_remote_primitives::pin_out & p11 = in_out_dummy,
+
+                        due_remote_primitives::pin_out & p12 = in_out_dummy,
+                        due_remote_primitives::pin_out & p13 = in_out_dummy,
+                        due_remote_primitives::pin_out & p14 = in_out_dummy,
+                        due_remote_primitives::pin_out & p15 = in_out_dummy
+                     ):
+                        pins{
+                           &p0, &p1, &p2, &p3,
+                           &p4, &p5, &p6, &p7,
+                           &p8, &p9, &p10, &p11,
+                           &p12, &p13, &p14, &p15
+                        }
+                     {}
+   
+   void write(bool v) override{
+      for(auto & pin : pins){
+         pin->write(v);
+      }
+   }
+
+   void flush() override{
+      for (auto & pin : pins){
+         pin->flush();
+      }
+   }
+};
+
+//======================================================================
 
 //get input from console screen
 char uart_getc(){
