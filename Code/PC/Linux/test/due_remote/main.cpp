@@ -9,6 +9,8 @@ int main(){
     auto pin2 = due_remote::pin_out(due_remote::pins::d50);
     auto pin3 = due_remote::pin_in(due_remote::pins::d48);
 
+    due_remote::waitForStartSignal();
+
     for(;;){
         pin.write(1);
         // pin.flush();

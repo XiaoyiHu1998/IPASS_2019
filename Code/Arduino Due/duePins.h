@@ -159,13 +159,13 @@ public:
 
     void read(int pin){
         adc_data reading;
-        reading.uint16 = static_cast<uint16_t>(pins[pin - 54].read());
+        reading.uint16 = static_cast<uint16_t>(pins[pin].read());
         hwlib::cout << static_cast<char>(reading.uint8[0]);
         hwlib::cout << static_cast<char>(reading.uint8[1]);
     }
 
     void refresh(int pin){
-        pins[pin - 54].refresh();
+        pins[pin].refresh();
     }
 };
 
