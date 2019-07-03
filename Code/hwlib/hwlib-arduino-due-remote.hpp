@@ -6,8 +6,12 @@
 
 //======================================================================
 
-serialPort_linux serialPort(path);
+serialPort_linux serialPort(path); //path declared in serialPort_linux_path.hpp
 
+//======================================================================
+//
+//                         Due_remote_primitives
+//
 //======================================================================
 
 namespace due_remote_primitives{
@@ -48,11 +52,7 @@ class pin_adc{
 };
 
 
-// ==========================================================================
-//
-// input / output port
-//
-// ==========================================================================
+//===========================input / output port===========================
 
 
 class port_in_out {
@@ -76,12 +76,7 @@ public:
 
 };
    
-   
-// ==========================================================================
-//
-// input port
-//
-// ==========================================================================
+//===============================input port================================
 
 class port_in {
 public:
@@ -94,12 +89,7 @@ public:
 
 };
 
-
-// ==========================================================================
-//
-// output port
-//
-// ==========================================================================
+// =============================output port================================
 
 class port_out {
 public:
@@ -114,12 +104,20 @@ public:
 
 };
 
+//                     namespace: due_remote_primitives
+//======================================================================
+
+
+
+//======================================================================
+//
+//                             Due_remote
+//
 //======================================================================
 
 namespace due_remote{
 
-//======================================================================
-
+//Use this at the start of the program to sync with Arduino Due
 void waitForStartSignal(){
    std::cout << "Serialport: " << path << std::endl;
    std::cout << "waiting for start signal from arduino" << std::endl << std::endl;
@@ -132,6 +130,10 @@ void waitForStartSignal(){
    }
 }
 
+//======================================================================
+//
+//                           Enum Classes
+//
 //======================================================================
 
 enum pins : uint8_t {
@@ -165,7 +167,7 @@ enum adc_pins : uint8_t{
    AD_SIZE_THIS_IS_NOT_A_PIN
 };
 
-//======================================================================
+//========================adc_data data-type============================
 
 union adc_data{
     uint8_t uint8[2];
@@ -173,6 +175,13 @@ union adc_data{
 };
 
 //======================================================================
+//
+//                              pins
+//
+//======================================================================
+
+
+//==========================Due_remote_primitives=======================
 
 class pin_in_out_dummy : public due_remote_primitives::pin_in_out{
 public:
@@ -271,6 +280,8 @@ public:
 
 };
 
+//===============================pin_out================================
+
 class pin_out_dummy : public due_remote_primitives::pin_out{
 public:
    virtual void write(bool v){}
@@ -324,6 +335,7 @@ public:
    }
 };
 
+//===============================pin_in=================================
 
 class pin_in_dummy : public due_remote_primitives::pin_in{
 public:
@@ -373,6 +385,8 @@ public:
    }
 };
 
+//=============================pin_oc_dummy=============================
+
 class pin_oc_dummy : public due_remote_primitives::pin_oc{
 public:
    bool read() override {return 0;}
@@ -383,6 +397,8 @@ public:
 
    void refresh() override{}
 };
+
+//======================pin_adc (not functional)========================
 
 class pin_adc_dummy : due_remote_primitives::pin_adc{
 public:
@@ -434,10 +450,17 @@ public:
 };
 
 //======================================================================
+//
+//                all_fromport_out_t / all_from_pin_out_t
+//
+//======================================================================
 
+//objects to fill empty parameters with
 pin_in_out_dummy in_in_out_dummy;
 pin_out_dummy in_out_dummy;
 pin_in_dummy in_in_dummy;
+
+//==========================all_from_pin_out_t==========================
 
 class all_from_pin_out_t : due_remote_primitives::pin_out{
 private:
@@ -486,6 +509,7 @@ public:
    }
 };
 
+//==========================all_from_port_out_t=========================
 
 class all_from_port_out_t : due_remote_primitives::pin_out{
 private:
@@ -508,6 +532,12 @@ public:
 
 
 //======================================================================
+//
+//                               port_outs
+//
+//======================================================================
+
+//========================port_in_out_from_pins_t=======================
 
 class port_in_out_from_pins_t : public due_remote_primitives::port_in_out{
 private:
@@ -606,6 +636,7 @@ public:
    }  
 };
 
+//=======================port_out_from_pins_t===========================
 
 class port_out_from_pins_t : public due_remote_primitives::port_out{
 private:
@@ -668,6 +699,8 @@ public:
       }
    }
 };
+
+//==========================port_in_from_pins_t=========================
 
 class port_in_from_pins_t : public due_remote_primitives::port_in{
 private:
@@ -738,6 +771,10 @@ public:
 
 
 //======================================================================
+//
+//                         input/output
+//
+//======================================================================
 
 //get input from console screen
 char uart_getc(){
@@ -751,6 +788,9 @@ void uart_putc(char character){
    hwlib::cout << character;
 }
 
-}; // namespace due_remote
+};
+
+// namespace due_remote
+//======================================================================
 
 #endif //HWLIB_ARDUINO_DUE_REMOTE_H
