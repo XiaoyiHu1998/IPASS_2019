@@ -1,21 +1,64 @@
+// ==========================================================================
+//
+// File      : hwlib-due-remote.hpp
+// Part of   : C++ hwlib extension library for close-to-the-hardware OO programming
+// Copyright : xy1998@live.nl 2019
+//
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at 
+// http://www.boost.org/LICENSE_1_0.txt)
+//
+// ==========================================================================
+
+// this file contains Doxygen lines
+/// @file
+
 #ifndef HWLIB_ARDUINO_DUE_REMOTE_H
 #define HWLIB_ARDUINO_DUE_REMOTE_H
 
 #include "/home/xiaoyi/Desktop/IPASS_2019/Code/PC/Linux/serialPort_linux.hpp"
 #include "/home/xiaoyi/Desktop/IPASS_2019/Code/PC/Linux/serialPort_linux_path.hpp"
 
-//======================================================================
-
-serialPort_linux serialPort(path); //path declared in serialPort_linux_path.hpp
-
-//======================================================================
+/// \brief
+/// hwlib extension for remote access and control to GPIO pins on Arduino Due's
+/// 
+/// \image html due-pcb.jpg
 //
-//                         Due_remote_primitives
-//
+/// The due_remote_primitives namespaces contains abstract superclasses for classes in
+/// the due_remote namespace.
+///
+/// The class names are used are the same as those found in the hwlib::due namespace
+/// as of June 2019 to maintain compatibility with existing programs using hwlib,
+/// requiring only a change in target namespace to due_remote.
+///
+/// The Due has an on-board orange LED connected to port 1 pin 27.
+///
+/// The chip runs at 3.3 Volt and that is the level on its IO pins.
+///
+/// \image html due-pinout.png
+///
+/// The ATSAM3X8E chip has a watchdog system that is enabled by default.
+/// If left alone, the watchdog will reset the chip after a short time. 
+/// To prevent this, the watchdog is disabled on the first 
+/// timing call (wait_*() or now_*()).
+///
+/// References:
+///    - <A HREF="https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf">
+///       Arduino Due circuit reference diagram</A> (pdf)
+///    - <A HREF="http://www.atmel.com/ru/ru/Images/Atmel-11057-32-bit-Cortex-M3-Microcontroller-SAM3X-SAM3A_Datasheet.pdf">
+///       ATSAM38XE datasheet</A> (pdf)
+///    - <A HREF="https://github.com/wovo/hwlib">
+///      Original HWLIB repository
+
 //======================================================================
 
+serialPort_linux serialPort(path); //path for serialport declared in serialPort_linux_path.hpp
+
+//======================================================================
+///namespace due_remote_primitives contains abstract classes for due_remote classes
 namespace due_remote_primitives{
 
+///abstract class for pin_in_out
 class pin_in_out{
 public:
    virtual void direction_set_output() = 0;
@@ -27,18 +70,21 @@ public:
    virtual void flush() = 0;
 };
 
+///abstract class for pin_out
 class pin_out{
 public:
    virtual void write(bool v) = 0;
    virtual void flush() = 0;
 };
 
+///abstract class for pin_in
 class pin_in{
 public:
    virtual bool read() = 0;
    virtual void refresh() = 0;
 };
 
+///abstract class for pin_oc
 class pin_oc{
    virtual bool read() = 0;
    virtual void write(bool v) = 0;
@@ -46,6 +92,7 @@ class pin_oc{
    virtual void refresh() = 0;
 };
 
+///abstract class for pin_adc
 class pin_adc{
    virtual uint16_t read() = 0;
    virtual void refresh() = 0;
@@ -55,6 +102,7 @@ class pin_adc{
 //===========================input / output port===========================
 
 
+///abstract class for port_in_out
 class port_in_out {
 public:
 
@@ -78,6 +126,7 @@ public:
    
 //===============================input port================================
 
+///abstract class for port_in
 class port_in {
 public:
 
@@ -91,6 +140,7 @@ public:
 
 // =============================output port================================
 
+///abstract class for port_out
 class port_out {
 public:
 
@@ -117,7 +167,7 @@ public:
 
 namespace due_remote{
 
-//Use this at the start of the program to sync with Arduino Due
+///function to make the program sync with Arduino Due at startup
 void waitForStartSignal(){
    std::cout << "Serialport: " << path << std::endl;
    std::cout << "waiting for start signal from arduino" << std::endl << std::endl;
@@ -136,6 +186,14 @@ void waitForStartSignal(){
 //
 //======================================================================
 
+/// Arduino Due GPIO pin names
+/// 
+/// These are the pins of an Arduino Due board.
+/// Digital pins d0..d13, analog input pins A0..A5, 
+/// SCL, SDA, TX (=D1), RX (=D0), 
+/// LED (=D13), SCK (=D13), MISO (=D12), MOSI (=D11), SS (=D10).
+
+enum class pins {
 enum pins : uint8_t {
    d0, d1, d2, d3, d4, d5, d6, d7, d8, d9,
    d10, d11, d12, d13, d14, d15, d16, d17, d18, d19,
@@ -161,6 +219,9 @@ enum pins : uint8_t {
    /// \endcond   
 };
 
+/// Arduino Due pin names
+/// 
+/// These are the ADC pins of an Arduino Due board.
 enum adc_pins : uint8_t{
    ad0, ad1, ad2, ad3, ad4, ad5, ad6, ad7, ad8, ad9, ad10,
    ad11,
@@ -169,6 +230,7 @@ enum adc_pins : uint8_t{
 
 //========================adc_data data-type============================
 
+//Union datatype used for data transfer from Arduino to PC for pin_adc.read()
 union adc_data{
     uint8_t uint8[2];
     uint16_t uint16;
@@ -183,17 +245,19 @@ union adc_data{
 
 //==========================Due_remote_primitives=======================
 
+///pin_in_out_dummy, always reads and writes 0
 class pin_in_out_dummy : public due_remote_primitives::pin_in_out{
 public:
-   virtual void direction_set_output(){}
-   virtual void direction_set_input(){}
-   virtual void direction_flush(){}
-   virtual bool read(){return 0;}
-   virtual void refresh(){}
-   virtual void write(bool v){}
-   virtual void flush(){}
+   virtual void direction_set_output() override {}
+   virtual void direction_set_input() override {}
+   virtual void direction_flush() override {}
+   virtual bool read() override { return 0; }
+   virtual void refresh() override {}
+   virtual void write(bool v) override {}
+   virtual void flush() override {}
 };
 
+///pin_in_out implementation for remote Arduino Due
 class pin_in_out : public due_remote_primitives::pin_in_out{
 private:
    pins number;
@@ -212,10 +276,20 @@ private:
    }
 
 public:
+
+   /// Remote Arduino Due pin_in_out constructor
+   /// 
+   /// Constructor for a remote Arduino in and output pin
+   ///
+   /// ENUMber given is a member of enum class due_remote::pins
+   /// ENUMbers refer to pin names on Arduino Board
+   ///
+   /// This constructor does not set the pin direction to in or output.
    pin_in_out(pins ENUMber){
                         number = ENUMber;
                         }
 
+   ///\brief sets direction of pin to output
    void direction_set_output() override{
       sendStartByte();
       selectClass();
@@ -223,6 +297,7 @@ public:
       selectPin();
    }
    
+   ///\brief sets direction of pin to input
    void direction_set_input() override{
       sendStartByte();
       selectClass();
@@ -230,31 +305,33 @@ public:
       selectPin();
    }
 
+   ///\brief flushes pin direction to pin
    void direction_flush() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('7', 1);
       selectPin();
    }
-
+   
+   ///\brief returns value on the pin, changes direction of pin if necessary
    bool read() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('4', 1);
       selectPin();
-      // sendEndByte();
       return serialPort.readBool();
       
    }
 
+   ///\brief refreshes the input pin
    void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
       selectPin();
-      // sendEndByte();
    }
 
+   ///\brief writes given bool value to pin, changes direction of pin if necessary
    void write(bool v) override{
       sendStartByte();
       selectClass();
@@ -267,28 +344,31 @@ public:
       else{
          serialPort.writeInt('b', 1);
       }
-      // sendEndByte();
    }
 
+   ///\brief flushes most recent written value onto the pin
    void flush() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('5', 1);
       selectPin();
-      // sendEndByte();
    }
 
 };
 
 //===============================pin_out================================
 
+///pin_in_out_dummy implementation for remote Arduino Due, always writes 0
 class pin_out_dummy : public due_remote_primitives::pin_out{
 public:
-   virtual void write(bool v){}
+   ///\brief writes 0 to pin
+   virtual void write(bool v) override {}
 
-   virtual void flush(){}
+   ///\brief flushes most recent written value onto the pin
+   virtual void flush() override {}
 };
 
+///pin_out implementation for remote Arduino Due
 class pin_out : public due_remote_primitives::pin_out{
 private:
    pins number;
@@ -307,10 +387,19 @@ private:
    }
 
 public:
+
+   /// Remote Arduino Due pin_out constructor
+   /// 
+   /// Constructor for a remote Arduino output pin
+   ///
+   /// ENUMber given is a member of enum class due_remote::pins
+   /// ENUMbers refer to pin names on Arduino Board
+
    pin_out(pins ENUMber){
                         number = ENUMber;
                         }
 
+   ///\brief writes given bool value to pin
    void write(bool v) override{
       sendStartByte();
       selectClass();
@@ -323,27 +412,30 @@ public:
       else{
          serialPort.writeInt('b', 1);
       }
-      // sendEndByte();
    }
 
+   ///\brief flushes most recently written value onto the pin
    void flush() override {
       sendStartByte();
       selectClass();
       serialPort.writeChar('5', 1);
       selectPin();
-      // sendEndByte();
    }
 };
 
 //===============================pin_in=================================
 
+///pin_in_dummy implementation for remote Arduino Due, always reads 0
 class pin_in_dummy : public due_remote_primitives::pin_in{
 public:
+   //\brief always returns 0
    virtual bool read(){return 0;}
 
+   //\brief refreshes value on the input pin
    virtual void refresh(){}
 };
 
+///pin_in implementation for remote Arduino Due
 class pin_in : public due_remote_primitives::pin_in{
 private:
    pins number;
@@ -362,50 +454,65 @@ private:
    }
    
 public:
+
+   /// Remote Arduino Due pin_in constructor
+   /// 
+   /// Constructor for a remote Arduino input pin
+   ///
+   /// ENUMber given is a member of enum class due_remote::pins
+   /// ENUMbers refer to pin names on Arduino Board
+
    pin_in(pins ENUMber){
                         number = ENUMber;
                         }
 
+   ///\brief returns value on the pin
    bool read() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('4', 1);
       selectPin();
-      // sendEndByte();
       return serialPort.readBool();
       
    }
 
+   ///\brief refreshes pin value to current value on the input pin
    void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
       selectPin();
-      // sendEndByte();
    }
 };
 
 //=============================pin_oc_dummy=============================
 
+///pin_oc_dummy implementation for remote Arduino Due, always reads and writes 0
 class pin_oc_dummy : public due_remote_primitives::pin_oc{
 public:
+///\brief always returns 0
    bool read() override {return 0;}
 
+///\brief writes 0 to pin
    void write(bool v) override {}
 
+///\brief flushes newest value to pin
    void flush() override {}
 
+///\brief reads most recent value on pin
    void refresh() override{}
 };
 
 //======================pin_adc (not functional)========================
 
+///pin_adc_dummy implementation for remote Arduino Due, always reads and writes 0
 class pin_adc_dummy : due_remote_primitives::pin_adc{
 public:
    uint16_t read() override {return 0;}
    void refresh() override {}
 };
 
+///pin_adc implementation for remote Arduino Due, does not work properly
 class pin_adc : public due_remote_primitives::pin_adc{
 private:
    adc_pins number;
@@ -424,10 +531,19 @@ private:
    }
 
 public:
+
+   /// Remote Arduino Due pin_adc constructor
+   /// 
+   /// Constructor for a remote Arduino adc pin
+   ///
+   /// ENUMber given is a member of enum class due_remote::pins
+   /// ENUMbers refer to pin names on Arduino Board
+
    pin_adc(adc_pins ENUMber){
       number = ENUMber;
    }
 
+   ///\brief returns value on adc pin
    uint16_t read() override{
       sendStartByte();
       selectClass();
@@ -440,6 +556,7 @@ public:
       // sendEndByte();
    }
 
+   ///\brief refreshes value on adc pin
    void refresh() override{
       sendStartByte();
       selectClass();
@@ -455,18 +572,29 @@ public:
 //
 //======================================================================
 
-//objects to fill empty parameters with
+///pin_in_out object to give as default for constructors
 pin_in_out_dummy in_in_out_dummy;
+///pin_out object to give as default for constructors
 pin_out_dummy in_out_dummy;
+///pin_in object to give as default for constructors
 pin_in_dummy in_in_dummy;
 
 //==========================all_from_pin_out_t==========================
 
+///implementation of all_from_port_out_t for remote Arduino Due
 class all_from_pin_out_t : due_remote_primitives::pin_out{
 private:
    static constexpr int max_pins = 16; 
    due_remote_primitives::pin_out * pins[max_pins];
 public:
+
+   /// Remote Arduino Due all_from_pin_out_t constructor
+   /// 
+   /// Constructor for a remote Arduino all_from_pin_out_t "pin"
+   ///
+   /// Takes a set of max 16 pin_outs and makes them addressable as one pin
+   /// When given less than max pins pin_out_dummy's are used to fill out the leftover pins
+
    all_from_pin_out_t(
                         due_remote_primitives::pin_out & p0 = in_out_dummy,
                         due_remote_primitives::pin_out & p1 = in_out_dummy,
@@ -496,12 +624,14 @@ public:
                         }
                      {}
    
+   ///\brief writes given bool value to all pins
    void write(bool v) override{
       for(auto & pin : pins){
          pin->write(v);
       }
    }
 
+   ///\brief flushes most recently written value to all pins
    void flush() override{
       for (auto & pin : pins){
          pin->flush();
@@ -511,20 +641,30 @@ public:
 
 //==========================all_from_port_out_t=========================
 
+///implementation of all_from_port_out_t for remote Arduino Due
 class all_from_port_out_t : due_remote_primitives::pin_out{
 private:
    due_remote_primitives::port_out & slave;
 public:
+
+   /// Remote Arduino Due all_from_port_out_t constructor
+   /// 
+   /// Constructor for a remote Arduino all_from_pin_port_t "pin"
+   ///
+   /// Takes a port_out and makes them act as one pin
+
    all_from_port_out_t(
                         due_remote_primitives::port_out & slave
                      ):
                         slave(slave)
                      {}
    
+   ///\brief writes given value to all pins on the port
    void write(bool v) override{
       slave.write( v ? 0xFF : 0x0 );
    }
 
+   ///\brief writes most recently written value all pins on the port
    void flush() override{
       slave.flush();
    }
@@ -539,6 +679,7 @@ public:
 
 //========================port_in_out_from_pins_t=======================
 
+///implementation of port_in_out_from_pins_t for remote Arduino Due
 class port_in_out_from_pins_t : public due_remote_primitives::port_in_out{
 private:
    static constexpr int max_pins = 16;
@@ -548,6 +689,13 @@ private:
    due_remote_primitives::pin_in_out * pins[ max_pins ]; 
 
 public:
+
+   /// Remote Arduino Due port_in_out_from_pins_t constructor
+   /// 
+   /// Constructor for a remote Arduino port_in_out_from_pins_t port
+   ///
+   /// Takes a set of max 16 pin_in_outs, and makes them adressable as a port
+
    port_in_out_from_pins_t(
                               due_remote_primitives::pin_in_out & p0 = in_in_out_dummy,
                               due_remote_primitives::pin_in_out & p1 = in_in_out_dummy,
@@ -583,16 +731,19 @@ public:
                               }
                            }
 
+   ///\brief returns the number of pins in the port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
    
+   ///\brief sets direction of pin_in_outs of the port to input
    void direction_set_input() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_set_input();
       }
    } 
    
+   ///\brief returns uint_fast16_t value with each bit representing the input value on the pins connected to port, changes pin direction if necesarry
    uint_fast16_t read() override{
       uint_fast8_t result = 0;
       for(uint_fast8_t i = _number_of_pins - 1; i >= 0; --i){
@@ -605,17 +756,21 @@ public:
       return result;
    }         
    
+   ///\brief refreshes values read on the pins of the port
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->refresh();
       }
    }  
 
+   ///\sets direction of pin_in_outs of the port to ouput
    void direction_set_output() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_set_output();
       }
-   }  
+   }
+   
+   ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
    void write( uint_fast16_t x ) override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->write((x & 0x01) != 0);
@@ -623,12 +778,14 @@ public:
       }
    }      
    
+   ///\brief flushes most recent written values to pins of the port
    void flush() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->flush();
       }
    }   
    
+   ///\brief flushes most recently given direction to the pins of the port
    void direction_flush()  override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_flush();
@@ -638,6 +795,7 @@ public:
 
 //=======================port_out_from_pins_t===========================
 
+///implementation of port_out_from_pins_t for remote Arduino Due
 class port_out_from_pins_t : public due_remote_primitives::port_out{
 private:
    static constexpr int max_pins = 16;
@@ -647,6 +805,13 @@ private:
    due_remote_primitives::pin_out * pins[ max_pins ]; 
 
 public:
+
+   /// Remote Arduino Due port_out_from_pins_t constructor
+   /// 
+   /// Constructor for a remote Arduino port_out_from_pins_t port
+   ///
+   /// Takes a set of max 16 pin_outs, and makes them adressable as a port
+
    port_out_from_pins_t(
                         due_remote_primitives::pin_out & p0 = in_out_dummy,
                         due_remote_primitives::pin_out & p1 = in_out_dummy,
@@ -682,10 +847,12 @@ public:
                         }
                      }
 
+   ///\brief returns the number of pins in the port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
 
+   ///\brief writes given uint_fast16_t value onto the pins of the port
    void write( uint_fast16_t x ) override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->write((x & 0x01) != 0);
@@ -693,6 +860,7 @@ public:
       }
    }      
    
+   ///\brief flushes most recently given direction to the pins of the port
    void flush() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->flush();
@@ -702,6 +870,7 @@ public:
 
 //==========================port_in_from_pins_t=========================
 
+///implementation of port_in_from_pins_t for remote Arduino Due
 class port_in_from_pins_t : public due_remote_primitives::port_in{
 private:
    static constexpr int max_pins = 16;
@@ -711,6 +880,13 @@ private:
    due_remote_primitives::pin_in * pins[ max_pins ]; 
 
 public:
+
+   /// Remote Arduino Due port_in_from_pins_t constructor
+   /// 
+   /// Constructor for a remote Arduino port_in_from_pins_t port
+   ///
+   /// Takes a set of max 16 pin_ins, and makes them adressable as a port
+
    port_in_from_pins_t(
                         due_remote_primitives::pin_in & p0 = in_in_dummy,
                         due_remote_primitives::pin_in & p1 = in_in_dummy,
@@ -746,10 +922,12 @@ public:
                         }
                      }
 
+   ///\brief returns the number of pins in the port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
    
+   ///\brief returns uint_fast16_t value with each bit representing the input value on the pins connected to port
    uint_fast16_t read() override{
       uint_fast8_t result = 0;
       for(uint_fast8_t i = _number_of_pins - 1; i >= 0; --i){
@@ -762,6 +940,7 @@ public:
       return result;
    }         
    
+   ///\brief refreshes values read on the pins of the port
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->refresh();
@@ -776,14 +955,14 @@ public:
 //
 //======================================================================
 
-//get input from console screen
+///get input from console screen
 char uart_getc(){
    char character;
    std::cin >> character;
    return character;
 }
 
-//output character to console screen.
+///output character to console screen.
 void uart_putc(char character){
    hwlib::cout << character;
 }
