@@ -54,6 +54,10 @@ void initialBlink(in_out_pins & GPIO, bool on){
     }
 }
 
+void sendStartSignal(){
+    hwlib::cout << 's';
+}
+
 
 
 int main(){
@@ -69,12 +73,9 @@ int main(){
     uint8_t pinNumber;
     char writeValue;
 
-    // GPIO.setOutput(53);
-    // GPIO.setOutput(2);
-    // GPIO.setOutput(7);
-    // GPIO.setOutput(8);
-
     initialBlink(GPIO, on);
+
+    sendStartSignal();
 
 
     while(1){
@@ -127,7 +128,12 @@ int main(){
                     case '6':
                         GPIO.refresh(pinNumber);
                         break;
+
+                    //direction_flush()
+                    case '7':
+                        GPIO.flushDirection(pinNumber);
                 }
+                break;
 
             //pin_adc
             case '2':
@@ -141,11 +147,13 @@ int main(){
 
                     //refresh
                     case '2':
+                        ADIO.refresh(pinNumber);
                         break;
                 }
                 break;
-            checkEndByte();
-            break;
+        
+        // checkEndByte();
+        break;
         }
     } 
 }

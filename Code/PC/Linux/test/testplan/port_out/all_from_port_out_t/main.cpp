@@ -5,8 +5,6 @@
 namespace due = due_remote;
 
 int main(){
-    std::cout << path << std::endl;
-
     auto pin0 = due::pin_out(due::pins::d52);
     auto pin1 = due::pin_out(due::pins::d50);
     auto pin2 = due::pin_out(due::pins::d48);
@@ -15,9 +13,6 @@ int main(){
     auto pin5 = due::pin_out(due::pins::d42);
     auto pin6 = due::pin_out(due::pins::d40);
     auto pin7 = due::pin_out(due::pins::d38);
-
-    // auto set0 = due::all_from_pin_out_t(pin0, pin1, pin4, pin5);
-    // auto set1 = due::all_from_pin_out_t(pin2, pin3, pin6, pin7);
 
     auto port0 = due::port_out_from_pins_t(pin0, pin1, pin4, pin5);
     auto port1 = due::port_out_from_pins_t(pin2, pin3, pin6, pin7);
@@ -28,25 +23,13 @@ int main(){
     
     for(;;){
         portSet0.write(9999'9999);
-        // hwlib::wait_ms(28);
         portSet0.flush();
-        // hwlib::wait_ms(28);
-
         portSet0.write(0);
-        // hwlib::wait_ms(28);
         portSet0.flush();
-        // hwlib::wait_ms(28);
-        
-        // hwlib::wait_ms(400);
 
         portSet1.write(9999'9999);
-        // hwlib::wait_ms(28);
         portSet1.flush();
-        // hwlib::wait_ms(28);
-
         portSet1.write(0);
-        // hwlib::wait_ms(28);
         portSet1.flush();
-        // hwlib::wait_ms(28);
     }
 }

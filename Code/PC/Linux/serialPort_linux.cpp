@@ -6,6 +6,7 @@ serialPort_linux::serialPort_linux(char* path){
     //check for errors
     if(port < 0){
         printf("ERROR %i from open: %s\n", errno, strerror(errno));
+        exit(-1);
     }
 
     //create termios struct called tty
@@ -25,6 +26,7 @@ serialPort_linux::serialPort_linux(char* path){
     //read in existing settings into termios struct
     if(tcgetattr(port, &tty) != 0){
         printf("ERROR %i from tcgetattr while reading in existing values: %s\n", errno, strerror(errno));
+        exit(-1);
     }
     //control flags
     tty.c_cflag |= PARENB;          //clears parity bit, disabling it (more common)
@@ -61,6 +63,7 @@ serialPort_linux::serialPort_linux(char* path){
     //save attributes for tty
     if(tcsetattr(port, TCSANOW, &tty) != 0){
         printf("ERROR %i from tcsetattr: %s\n", errno, strerror(errno)); //error message
+        exit(-1);
     }
 }
 
@@ -119,10 +122,21 @@ bool serialPort_linux::readBool(){
 char serialPort_linux::readChar(){
     char buffer;
     int amountRead = read(port, &buffer, sizeof(buffer));
-    std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
+    // std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
     if(amountRead < 0){
         std::cout << "ERROR: error while reading serial port" << std::endl;
     }
 
     return buffer;
+}
+
+uint8_t serialPort_linux::readInt(){
+    char buffer;
+    int amountRead = read(port, &buffer, sizeof(buffer));
+    std::cout << "Read: " << amountRead << " Value: " << buffer << std::endl;
+    if(amountRead < 0){
+        std::cout << "ERROR: error while reading serial port" << std::endl;
+    }
+
+    return static_cast<uint8_t>(buffer);
 }
