@@ -28,25 +28,13 @@ int main(){
     
     for(;;){
         portSet0.write(9999'9999);
-        // hwlib::wait_ms(28);
         portSet0.flush();
-        // hwlib::wait_ms(28);
-
         portSet0.write(0);
-        // hwlib::wait_ms(28);
         portSet0.flush();
-        // hwlib::wait_ms(28);
-        
-        // hwlib::wait_ms(400);
 
         portSet1.write(9999'9999);
-        // hwlib::wait_ms(28);
         portSet1.flush();
-        // hwlib::wait_ms(28);
-
         portSet1.write(0);
-        // hwlib::wait_ms(28);
         portSet1.flush();
-        // hwlib::wait_ms(28);
     }
 }
