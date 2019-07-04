@@ -20,14 +20,14 @@ int main(){
     due_remote::waitForStartSignal();
     
     for(;;){
-        port0.write(1);
-        port0.flush();
-        port0.write(0);
-        port0.flush();
+        set0.write(1);
+        set0.flush();
+        set0.write(0);
+        set0.flush();
 
-        port1.write(1);
-        port1.flush();
-        port1.write(0);
-        port1.flush();
+        set1.write(1);
+        set1.flush();
+        set1.write(0);
+        set1.flush();
     }
 }

@@ -29,5 +29,17 @@ int main(){
         port1.flush();
         port1.write(0);
         port1.flush();
+
+        hwlib::wait_ms(200);
+
+        port0.write(1);
+        port0.flush();
+        port0.write(0);
+        port0.flush();
+
+        port1.write(1);
+        port1.flush();
+        port1.write(0);
+        port1.flush();
     }
 }

@@ -14,21 +14,17 @@ int main(){
     auto pin6 = due::pin_in_out(due::pins::d40);
     auto pin7 = due::pin_in_out(due::pins::d38);
 
-    auto port0 = due::port_in_out_from_pins_t(pin0, pin1, pin4, pin5);
-    auto port1 = due::port_in_out_from_pins_t(pin2, pin3, pin6, pin7);
+    auto port = due::port_in_out_from_pins_t(pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7);
 
     due_remote::waitForStartSignal();
 
-    uint_fast16_t row1;
-    uint_fast16_t row2;
+    uint_fast16_t portValue;
     
     for(;;){
-        port0.refresh();
-        row1 = port0.read();
-        std::cout << row1 << std::endl;
-
-        port1.refresh();
-        row2 = port1.read();
-        std::cout << row2 << std::endl;
+        port.refresh();
+        hwlib::wait_ms(28);
+        portValue = port.read();
+        std::cout << "Input Values on port_in: " << portValue << std::endl;
+        hwlib::wait_ms(28);
     }
 }

@@ -22,14 +22,18 @@ int main(){
     due_remote::waitForStartSignal();
     
     for(;;){
-        portSet0.write(9999'9999);
-        portSet0.flush();
-        portSet0.write(0);
-        portSet0.flush();
+        port0.write(1);
+        port0.flush();
+        hwlib::wait_ms(200);
+        port0.write(0);
+        port0.flush();
+        hwlib::wait_ms(200);
 
-        portSet1.write(9999'9999);
-        portSet1.flush();
-        portSet1.write(0);
-        portSet1.flush();
+        port1.write(1);
+        port1.flush();
+        hwlib::wait_ms(200);
+        port1.write(0);
+        port1.flush();
+        hwlib::wait_ms(200);
     }
 }
