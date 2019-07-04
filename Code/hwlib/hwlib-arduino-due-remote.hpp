@@ -68,6 +68,8 @@ public:
    virtual void refresh() = 0;
    virtual void write(bool v) = 0;
    virtual void flush() = 0;
+   virtual void pullup_enable() = 0;
+   virtual void pullup_disable() = 0;
 };
 
 ///abstract class for pin_out
@@ -82,6 +84,8 @@ class pin_in{
 public:
    virtual bool read() = 0;
    virtual void refresh() = 0;
+   virtual void pullup_enable() = 0;
+   virtual void pullup_disable() = 0;
 };
 
 ///abstract class for pin_oc
@@ -122,6 +126,10 @@ public:
    
    virtual void direction_flush() = 0;
 
+   virtual void pullup_enable() = 0;
+
+   virtual void pullup_disable() = 0;
+
 };
    
 //===============================input port================================
@@ -135,6 +143,10 @@ public:
    virtual uint_fast16_t read() = 0; 
 
    virtual void refresh() = 0;
+
+   virtual void pullup_enable() = 0
+
+   virtual void pullup_disable() = 0;
 
 };
 
@@ -248,13 +260,15 @@ union adc_data{
 ///pin_in_out_dummy, always reads and writes 0
 class pin_in_out_dummy : public due_remote_primitives::pin_in_out{
 public:
-   virtual void direction_set_output() override {}
-   virtual void direction_set_input() override {}
-   virtual void direction_flush() override {}
-   virtual bool read() override { return 0; }
-   virtual void refresh() override {}
-   virtual void write(bool v) override {}
-   virtual void flush() override {}
+   void direction_set_output() override {}
+   void direction_set_input() override {}
+   void direction_flush() override {}
+   bool read() override { return 0; }
+   void refresh() override {}
+   void write(bool v) override {}
+   void flush() override {}
+   void pullup_enable() override {}
+   void pullup_disable() override {}
 };
 
 ///pin_in_out implementation for remote Arduino Due
@@ -361,6 +375,24 @@ public:
       selectPin();
    }
 
+   ///\brief enables the pullup
+   ///\details enables the weak pullup resistor on the pin
+   void pullup_enable() override {
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('8', 1);
+      selectPin();
+   }
+
+   ///\brief disables the pullup
+   ///\details disables the weak pullup resistor on the pin
+   void pullup_disable() override {
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('9', 1);
+      selectPin();
+   }
+
 };
 
 //===============================pin_out================================
@@ -370,11 +402,11 @@ class pin_out_dummy : public due_remote_primitives::pin_out{
 public:
    ///\brief writes 0 to pin
    ///\details writes 0 to pin
-   virtual void write(bool v) override {}
+   void write(bool v) override {}
 
    ///\brief flushes most recent written value onto the pin
    ///\flushes the pin to make it output the last value written to it
-   virtual void flush() override {}
+   void flush() override {}
 };
 
 ///pin_out implementation for remote Arduino Due
@@ -441,11 +473,19 @@ class pin_in_dummy : public due_remote_primitives::pin_in{
 public:
    ///\brief always returns 0
    ///\details returns 0
-   virtual bool read(){return 0;}
+   bool read() override {return 0;}
 
    ///\brief refreshes value on the pin
    ///\details refreshes value on the pin
-   virtual void refresh(){}
+   void refresh() override {}
+
+   ///\brief enables the pullup
+   ///\details enables the weak pullup resistor on the pin
+   void pullup_enable() override {}
+
+   ///\brief disables the pullup
+   ///\details disables the weak pullup resistor on the pin
+   void pullup_disable() override {}
 };
 
 ///pin_in implementation for remote Arduino Due
@@ -496,6 +536,24 @@ public:
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
+      selectPin();
+   }
+
+   ///\brief enables the pullup
+   ///\details enables the weak pullup resistor on the pin
+   void pullup_enable() override {
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('8', 1);
+      selectPin();
+   }
+
+   ///\brief disables the pullup
+   ///\details disables the weak pullup resistor on the pin
+   void pullup_disable() override {
+      sendStartByte();
+      selectClass();
+      serialPort.writeChar('9', 1);
       selectPin();
    }
 };
