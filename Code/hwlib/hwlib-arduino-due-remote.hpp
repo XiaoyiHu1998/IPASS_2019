@@ -61,40 +61,90 @@ namespace due_remote_primitives{
 ///\brief abstract class for pin_in_out
 class pin_in_out{
 public:
+   ///\brief sets pin to output
+   ///\details sets direction of pin to turn it into an output pins
    virtual void direction_set_output() = 0;
+
+   ///\brief sets pin to input
+   ///\details sets direction of pin to turn it into an input pin
    virtual void direction_set_input() = 0;
+
+   ///\brief flushes pin direction
+   ///\details changes value of signal comming out of the pin to the value most recently written to it
    virtual void direction_flush() = 0;
+
+   ///\brief returns value on the pin
+   ///\details returns value recieved form when the pin was last refreshed, will change direction if pin is set to output before read is called
    virtual bool read() = 0;
+
+   ///\brief refreshes the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    virtual void refresh() = 0;
+
+   ///\brief writes bool v to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called, this function will change the pin to output if previously set to input
    virtual void write(bool v) = 0;
+
+   ///\brief flushes the pin
+   ///\details flushes the pin to make it output the signal last written to it
    virtual void flush() = 0;
 };
 
 ///abstract class for pin_out
 class pin_out{
 public:
+
+   ///\brief writes bool v to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called
    virtual void write(bool v) = 0;
+
+   ///\brief flushes the pin
+   ///\details flushes the pin to make it output the signal last written to it
    virtual void flush() = 0;
 };
 
 ///abstract class for pin_in
 class pin_in{
 public:
+
+   ///\brief returns value on the pin
+   ///\details returns value recieved form when the pin was last refreshed
    virtual bool read() = 0;
+
+   ///\brief refreshes the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    virtual void refresh() = 0;
 };
 
 ///abstract class for pin_oc
 class pin_oc{
+
+   ///\brief returns value on the pin
+   ///\details returns value recieved form when the pin was last refreshed
    virtual bool read() = 0;
+
+   ///\brief writes bool v to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called
    virtual void write(bool v) = 0;
+
+   ///\brief flushes the pin
+   ///\details flushes the pin to make it output the signal last written to it
    virtual void flush() = 0;
+
+   ///\brief refreshes the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    virtual void refresh() = 0;
 };
 
 ///abstract class for pin_adc
 class pin_adc{
+
+   ///\brief returns value on adc pin
+   ///\details returns uint16_t with value inbetween 0 and 4096, currently not functional
    virtual uint16_t read() = 0;
+
+   ///\brief refreshes adc pin
+   ///\details redhreshes value returned by read to current value read on pin
    virtual void refresh() = 0;
 };
 
@@ -106,20 +156,36 @@ class pin_adc{
 class port_in_out {
 public:
 
+   ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    virtual uint_fast8_t number_of_pins() = 0;
-   
+
+   ///\brief sets direction of pin_in_outs of the port to input
+   ///\detials sets direction of all pins_outs of the port to input
    virtual void direction_set_input() = 0;   
    
+   ///\brief returns uint_fast16_t value
+   ///\details returns uint_fast16_t value with each bit representing the input value on the pins connected to port, changes pin direction if necesarry
    virtual uint_fast16_t read() = 0;         
    
+   ///\brief refreshes pins of the port
+   ///\brief refreshes values read on the pins of the port
    virtual void refresh() = 0;
 
+   ///\sets direction of pin_in_outs of the port to ouput
+   ///\detials sets direction of all pins_outs of the port to output
    virtual void direction_set_output() = 0;
 
-   virtual void write( uint_fast16_t x ) = 0;     
+   ///\brief writes given uint_fast16_t
+   ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
+   virtual void write( uint_fast16_t x ) = 0;
    
+   ///\brief flushes pins of the port
+   ///\brief flushes most recent written values to pins of the port
    virtual void flush() = 0;  
    
+   ///\brief flushes  pins of the port
+   ///\brief flushes most recently given direction to the pins of the port
    virtual void direction_flush() = 0;
 
 };
@@ -130,10 +196,16 @@ public:
 class port_in {
 public:
 
+   ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    virtual uint_fast8_t number_of_pins() = 0;
-   
+
+   ///\brief returns uint_fast16_t value
+   ///\details returns uint_fast16_t value with each bit representing the input value on the pins connected to port
    virtual uint_fast16_t read() = 0; 
 
+   ///\brief refreshes pins of the port
+   ///\brief refreshes values read on the pins of the port
    virtual void refresh() = 0;
 
 };
@@ -144,10 +216,16 @@ public:
 class port_out {
 public:
 
+   ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    virtual uint_fast8_t number_of_pins() = 0;
-   
+
+   ///\brief writes given uint_fast16_t
+   ///\brief writes given uint_fast16_t value onto the pins of the port
    virtual void write( uint_fast16_t x ) = 0;     
    
+   ///\brief flushes pins of the port
+   ///\brief flushes most recent written values to pins of the port
    virtual void flush() = 0;      
 
 };
@@ -248,12 +326,32 @@ union adc_data{
 ///pin_in_out_dummy, always reads and writes 0
 class pin_in_out_dummy : public due_remote_primitives::pin_in_out{
 public:
+   ///\brief sets pin to output
+   ///\details sets direction of pin to turn it into an output pins
    void direction_set_output() override {}
+
+   ///\brief sets pin to input
+   ///\details sets direction of pin to turn it into an input pin
    void direction_set_input() override {}
+
+   ///\brief flushes pin direction
+   ///\details changes value of signal comming out of the pin to the value most recently written to it
    void direction_flush() override {}
+
+   ///\brief returns value on the pin
+   ///\details returns value recieved form when the pin was last refreshed, will change direction if pin is set to output before read is called
    bool read() override { return 0; }
+
+   ///\brief refreshes the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    void refresh() override {}
+
+   ///\brief writes bool v to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called, this function will change the pin to output if previously set to input
    void write(bool v) override {}
+
+   ///\brief flushes the pin
+   ///\details flushes the pin to make it output the signal last written to it
    void flush() override {}
 };
 
