@@ -693,6 +693,8 @@ public:
 
    ///\brief writes most recently written value all pins on the port
    ///\flushes pins most recently written value to all pins on port in object
+   void flush() override{
+      slave.flush();
    }
 };
 
