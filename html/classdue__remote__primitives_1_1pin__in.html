@@ -116,16 +116,77 @@ Inheritance diagram for due_remote_primitives::pin_in:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0bb063aaf95937a789eef4014bb561d9"><td class="memItemLeft" align="right" valign="top"><a id="a0bb063aaf95937a789eef4014bb561d9"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()=0</td></tr>
+<tr class="memitem:a0bb063aaf95937a789eef4014bb561d9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1pin__in.html#a0bb063aaf95937a789eef4014bb561d9">read</a> ()=0</td></tr>
+<tr class="memdesc:a0bb063aaf95937a789eef4014bb561d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns value on the pin  <a href="#a0bb063aaf95937a789eef4014bb561d9">More...</a><br /></td></tr>
 <tr class="separator:a0bb063aaf95937a789eef4014bb561d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21c79fc502eb84ad7bdf403be785b9b3"><td class="memItemLeft" align="right" valign="top"><a id="a21c79fc502eb84ad7bdf403be785b9b3"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()=0</td></tr>
+<tr class="memitem:a21c79fc502eb84ad7bdf403be785b9b3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1pin__in.html#a21c79fc502eb84ad7bdf403be785b9b3">refresh</a> ()=0</td></tr>
+<tr class="memdesc:a21c79fc502eb84ad7bdf403be785b9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">refreshes the input pin  <a href="#a21c79fc502eb84ad7bdf403be785b9b3">More...</a><br /></td></tr>
 <tr class="separator:a21c79fc502eb84ad7bdf403be785b9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>abstract class for <a class="el" href="classdue__remote__primitives_1_1pin__in.html" title="abstract class for pin_in ">pin_in</a> </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0bb063aaf95937a789eef4014bb561d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb063aaf95937a789eef4014bb561d9">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool due_remote_primitives::pin_in::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns value on the pin </p>
+<p>returns value recieved form when the pin was last refreshed </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1pin__in.html#a4cfe35a7f62ab85fa6bada1026395dd2">due_remote::pin_in</a>, and <a class="el" href="classdue__remote_1_1pin__in__dummy.html#af9d3c6f9746b9dce530939254883914e">due_remote::pin_in_dummy</a>.</p>
+
+</div>
+</div>
+<a id="a21c79fc502eb84ad7bdf403be785b9b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c79fc502eb84ad7bdf403be785b9b3">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void due_remote_primitives::pin_in::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>refreshes the input pin </p>
+<p>refreshes the value returned by pin to the current signal value on the pin </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1pin__in.html#a50a39dc7ac405524a2f799017bebb058">due_remote::pin_in</a>, and <a class="el" href="classdue__remote_1_1pin__in__dummy.html#aacc979804e4c6c059f382a3c7150b542">due_remote::pin_in_dummy</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="hwlib-arduino-due-remote_8hpp_source.html">hwlib-arduino-due-remote.hpp</a></li>
 </ul>
 </div><!-- contents -->
@@ -134,7 +195,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> (
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote__primitives.html">due_remote_primitives</a></li><li class="navelem"><a class="el" href="classdue__remote__primitives_1_1pin__in.html">pin_in</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 14:52:07 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 15:12:20 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

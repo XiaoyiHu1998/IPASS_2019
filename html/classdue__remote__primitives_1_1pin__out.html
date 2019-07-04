@@ -118,16 +118,78 @@ Inheritance diagram for due_remote_primitives::pin_out:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac458318a236bcd54f4a41f152562fc4a"><td class="memItemLeft" align="right" valign="top"><a id="ac458318a236bcd54f4a41f152562fc4a"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (bool v)=0</td></tr>
+<tr class="memitem:ac458318a236bcd54f4a41f152562fc4a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1pin__out.html#ac458318a236bcd54f4a41f152562fc4a">write</a> (bool v)=0</td></tr>
+<tr class="memdesc:ac458318a236bcd54f4a41f152562fc4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes bool v to pin  <a href="#ac458318a236bcd54f4a41f152562fc4a">More...</a><br /></td></tr>
 <tr class="separator:ac458318a236bcd54f4a41f152562fc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c359851fa72b20d9c4defeeb16ac483"><td class="memItemLeft" align="right" valign="top"><a id="a2c359851fa72b20d9c4defeeb16ac483"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()=0</td></tr>
+<tr class="memitem:a2c359851fa72b20d9c4defeeb16ac483"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1pin__out.html#a2c359851fa72b20d9c4defeeb16ac483">flush</a> ()=0</td></tr>
+<tr class="memdesc:a2c359851fa72b20d9c4defeeb16ac483"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes the pin  <a href="#a2c359851fa72b20d9c4defeeb16ac483">More...</a><br /></td></tr>
 <tr class="separator:a2c359851fa72b20d9c4defeeb16ac483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>abstract class for <a class="el" href="classdue__remote__primitives_1_1pin__out.html" title="abstract class for pin_out ">pin_out</a> </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2c359851fa72b20d9c4defeeb16ac483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c359851fa72b20d9c4defeeb16ac483">&#9670;&nbsp;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void due_remote_primitives::pin_out::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>flushes the pin </p>
+<p>flushes the pin to make it output the signal last written to it </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1all__from__port__out__t.html#a99506f50010ba8bcaaebf027677a2dc7">due_remote::all_from_port_out_t</a>, <a class="el" href="classdue__remote_1_1all__from__pin__out__t.html#a9e4d4a3a6356d200dc1f400e89f3233f">due_remote::all_from_pin_out_t</a>, <a class="el" href="classdue__remote_1_1pin__out.html#a0001fad3358e4a2206072896de7e0906">due_remote::pin_out</a>, and <a class="el" href="classdue__remote_1_1pin__out__dummy.html#ac52b10a87e1dd686a91aa9b834c447af">due_remote::pin_out_dummy</a>.</p>
+
+</div>
+</div>
+<a id="ac458318a236bcd54f4a41f152562fc4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac458318a236bcd54f4a41f152562fc4a">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void due_remote_primitives::pin_out::write </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>writes bool v to pin </p>
+<p>writes the given bool value to the pin which will be outputted after <a class="el" href="classdue__remote__primitives_1_1pin__out.html#a2c359851fa72b20d9c4defeeb16ac483" title="flushes the pin ">flush()</a> is called </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1all__from__port__out__t.html#a89302eb10a939582d8a517d7d1380d13">due_remote::all_from_port_out_t</a>, <a class="el" href="classdue__remote_1_1all__from__pin__out__t.html#ab59efb5112895a3111f32dedfcd11ef9">due_remote::all_from_pin_out_t</a>, <a class="el" href="classdue__remote_1_1pin__out.html#ac304e2589d6d6d56ea89a373ca784dfa">due_remote::pin_out</a>, and <a class="el" href="classdue__remote_1_1pin__out__dummy.html#adc5de35cc1a8698a41f806ed73bcf0af">due_remote::pin_out_dummy</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="hwlib-arduino-due-remote_8hpp_source.html">hwlib-arduino-due-remote.hpp</a></li>
 </ul>
 </div><!-- contents -->
@@ -136,7 +198,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()=
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote__primitives.html">due_remote_primitives</a></li><li class="navelem"><a class="el" href="classdue__remote__primitives_1_1pin__out.html">pin_out</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 14:52:07 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 15:12:20 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

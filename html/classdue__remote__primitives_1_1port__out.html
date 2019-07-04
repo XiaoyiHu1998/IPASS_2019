@@ -115,19 +115,111 @@ Inheritance diagram for due_remote_primitives::port_out:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6c735142875fb904de66a971e13fb656"><td class="memItemLeft" align="right" valign="top"><a id="a6c735142875fb904de66a971e13fb656"></a>
-virtual uint_fast8_t&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_pins</b> ()=0</td></tr>
+<tr class="memitem:a6c735142875fb904de66a971e13fb656"><td class="memItemLeft" align="right" valign="top">virtual uint_fast8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1port__out.html#a6c735142875fb904de66a971e13fb656">number_of_pins</a> ()=0</td></tr>
+<tr class="memdesc:a6c735142875fb904de66a971e13fb656"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of pins in the port  <a href="#a6c735142875fb904de66a971e13fb656">More...</a><br /></td></tr>
 <tr class="separator:a6c735142875fb904de66a971e13fb656"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eb4a7b9022d596e360ab9457cf46427"><td class="memItemLeft" align="right" valign="top"><a id="a0eb4a7b9022d596e360ab9457cf46427"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (uint_fast16_t x)=0</td></tr>
+<tr class="memitem:a0eb4a7b9022d596e360ab9457cf46427"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1port__out.html#a0eb4a7b9022d596e360ab9457cf46427">write</a> (uint_fast16_t x)=0</td></tr>
+<tr class="memdesc:a0eb4a7b9022d596e360ab9457cf46427"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes given uint_fast16_t  <a href="#a0eb4a7b9022d596e360ab9457cf46427">More...</a><br /></td></tr>
 <tr class="separator:a0eb4a7b9022d596e360ab9457cf46427"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e7d9970e27d25fa042d3a4df97fb5d1"><td class="memItemLeft" align="right" valign="top"><a id="a2e7d9970e27d25fa042d3a4df97fb5d1"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()=0</td></tr>
+<tr class="memitem:a2e7d9970e27d25fa042d3a4df97fb5d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote__primitives_1_1port__out.html#a2e7d9970e27d25fa042d3a4df97fb5d1">flush</a> ()=0</td></tr>
+<tr class="memdesc:a2e7d9970e27d25fa042d3a4df97fb5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes pins of the port  <a href="#a2e7d9970e27d25fa042d3a4df97fb5d1">More...</a><br /></td></tr>
 <tr class="separator:a2e7d9970e27d25fa042d3a4df97fb5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>abstract class for <a class="el" href="classdue__remote__primitives_1_1port__out.html" title="abstract class for port_out ">port_out</a> </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2e7d9970e27d25fa042d3a4df97fb5d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e7d9970e27d25fa042d3a4df97fb5d1">&#9670;&nbsp;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void due_remote_primitives::port_out::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>flushes pins of the port </p>
+<p>flushes most recent written values to pins of the port </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1port__out__from__pins__t.html#aa2c895bf50405ac53435c26da538e946">due_remote::port_out_from_pins_t</a>.</p>
+
+</div>
+</div>
+<a id="a6c735142875fb904de66a971e13fb656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c735142875fb904de66a971e13fb656">&#9670;&nbsp;</a></span>number_of_pins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint_fast8_t due_remote_primitives::port_out::number_of_pins </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns the number of pins in the port </p>
+<p>returns uint_fast8_t that is equal to amount of pins put into port </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1port__out__from__pins__t.html#a7964ac7f8bfbac0199ddfc47556e247c">due_remote::port_out_from_pins_t</a>.</p>
+
+</div>
+</div>
+<a id="a0eb4a7b9022d596e360ab9457cf46427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eb4a7b9022d596e360ab9457cf46427">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void due_remote_primitives::port_out::write </td>
+          <td>(</td>
+          <td class="paramtype">uint_fast16_t&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>writes given uint_fast16_t </p>
+<p>writes given uint_fast16_t value onto the pins of the port </p>
+
+<p>Implemented in <a class="el" href="classdue__remote_1_1port__out__from__pins__t.html#a3fd391ac4294075ee0852cb3a7cdd94d">due_remote::port_out_from_pins_t</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="hwlib-arduino-due-remote_8hpp_source.html">hwlib-arduino-due-remote.hpp</a></li>
 </ul>
 </div><!-- contents -->
@@ -136,7 +228,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()=
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote__primitives.html">due_remote_primitives</a></li><li class="navelem"><a class="el" href="classdue__remote__primitives_1_1port__out.html">port_out</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 14:52:07 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 15:12:20 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
