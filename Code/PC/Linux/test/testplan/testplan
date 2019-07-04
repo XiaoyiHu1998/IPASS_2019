@@ -1,0 +1,151 @@
+// ==========================================================================
+//
+// File      : hwlib-due-remote.hpp
+// Part of   : C++ hwlib extension library for remote pin control
+// Copyright : xy1998@live.nl 2019
+//
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at 
+// http://www.boost.org/LICENSE_1_0.txt)
+//
+// ==========================================================================
+
+This testplan details the use of delivered test programs to verify the correct functioning of the library.
+
+Unit tests:
+    in order to be sure individual classes and functions are functional and working as inteded run each of the includede test programs, and see if their behaviour is as expected.
+
+    pin_in_out
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_in_out works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -pressing the button connected to pin d52 turns on the led connected to pin d50
+            -letting go of the button on pin d52 turns the led on pin d50 off
+
+    pin_in_out_dummy
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_in_out_dummy works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -pressing the button connected to pin d52 does not affect the led on pind d50
+            -letting go of the button on pin d52 does not affect the led on pin d50
+            -the led does not turn on at all
+        
+    pin_out
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_out works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the led connected to pin d52 blinks
+        
+    pin_out_dummy
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_out_dummy works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the led connected to pin d52 does not turn on or blink
+        
+    pin_in
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_in works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -pressing the button on pin d52 results the terminal printing 1
+            -letting go or not pressing the button on pin d52 at all results in tth terminal printing 0
+        
+    pin_in_dummy
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_in_dummy works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal only prints 0 regardless of whether the button on pin d52 is pressed
+        
+    pin_oc_dummy
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_oc_dummy works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -pressing the button connected to pin d52 does not affect the led on pind d50
+            -letting go of the button on pin d52 does not affect the led on pin d50
+            -the led does not turn on at all
+        
+    pin_adc
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_adc works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal prints a value in accordance to how you turn the potentiometer connected to pin ad0
+        
+    pin_adc_dummy
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -pin_adc_dummy works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal prints 0 regardless of how you turn the potentiometer connected to pin ad0
+            -the terminal prints only 0
+        
+    port_in_out_from_pins_t output
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -port_in_out_from_pins_t output works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the leds connected to port 0 and port 1 intermittedly flash with a the following pattern
+                -11001100
+                -00110011
+                -10000000
+                -00100000
+    
+    port_in_out_from_pins_t input
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -port_in_out_from_pins_t input works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal prints out an uint_fast16_t corresponding with input values on the pins of the port
+    
+    port_out_from_pins_t
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -port_out_from_pins_t works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the leds connected to port 0 and port 1 intermittedly flash with a the following pattern
+                -11001100
+                -00110011
+                -10000000
+                -00100000
+        
+    port_in_from_pins_t
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -port_in_from_pins_t works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal prints out an uint_fast16_t corresponding with input values on the pins of the port
+        
+    all_from_pin_out_t
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -all_from_pin_out_t works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the leds connected to set0 and set1 intermittedly flash with a the following pattern
+                -11001100
+                -00110011
+                -11001100
+                -00110011
+        
+    all_from_port_out_t
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -all_from_port_out_t works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the leds connected to port 0 and port 1 intermittedly flash with a the following pattern
+                -11001100
+                -00000000
+                -00110011
+                -00000000
+        
+    uart_getc() and uart_getc()
+        -set up the breadboard according to the pin setup in the main.cpp
+        -run the provided test program
+        -uart_getc works properly when these conditions are fullfilled:
+            -the program compiles and runs
+            -the terminal outputs the character it asked you to put in

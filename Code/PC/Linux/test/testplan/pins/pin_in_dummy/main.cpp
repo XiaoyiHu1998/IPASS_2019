@@ -5,15 +5,14 @@
 namespace due = due_remote;
 
 int main(){
-    auto pin0 = due::pin_in_out(due::pins::d52);
+    auto pin0 = due::pin_in_dummy();
 
     due_remote::waitForStartSignal();
     
     for(;;){
-        pin0.write(1);
-        pin0.flush();
+        pin0.refresh();
+        hwlib::wait_ms(28);
+        std::cout << "Value read on pin 52: " << pin0.read() << std::endl;
         hwlib::wait_ms(500);
-        pin0.write(0);
-        pin0.flush();
     }
 }
