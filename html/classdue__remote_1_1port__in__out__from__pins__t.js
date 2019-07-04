@@ -6,8 +6,6 @@ var classdue__remote_1_1port__in__out__from__pins__t =
     [ "direction_set_output", "classdue__remote_1_1port__in__out__from__pins__t.html#a6ee270d7b6b2868f0762e87368bb283f", null ],
     [ "flush", "classdue__remote_1_1port__in__out__from__pins__t.html#a6a945976a3d320a9ccd42d3d750c0c4c", null ],
     [ "number_of_pins", "classdue__remote_1_1port__in__out__from__pins__t.html#a4593c20afab72aaaf6c819221282fc95", null ],
-    [ "pullup_disable", "classdue__remote_1_1port__in__out__from__pins__t.html#a67077cb582f701ccbc1b84249c86e76d", null ],
-    [ "pullup_enable", "classdue__remote_1_1port__in__out__from__pins__t.html#a282c6985e39c2c705aae006010fd57ff", null ],
     [ "read", "classdue__remote_1_1port__in__out__from__pins__t.html#adcf619c0a29993da5fc9d48bdbb7f974", null ],
     [ "refresh", "classdue__remote_1_1port__in__out__from__pins__t.html#af33aee4dcfee2a7a08d604212a26a00d", null ],
     [ "write", "classdue__remote_1_1port__in__out__from__pins__t.html#a301aa3bec9308672f454d40364dbc75d", null ]
