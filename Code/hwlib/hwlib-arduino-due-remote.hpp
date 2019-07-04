@@ -68,8 +68,6 @@ public:
    virtual void refresh() = 0;
    virtual void write(bool v) = 0;
    virtual void flush() = 0;
-   virtual void pullup_enable() = 0;
-   virtual void pullup_disable() = 0;
 };
 
 ///abstract class for pin_out
@@ -84,8 +82,6 @@ class pin_in{
 public:
    virtual bool read() = 0;
    virtual void refresh() = 0;
-   virtual void pullup_enable() = 0;
-   virtual void pullup_disable() = 0;
 };
 
 ///abstract class for pin_oc
@@ -126,10 +122,6 @@ public:
    
    virtual void direction_flush() = 0;
 
-   virtual void pullup_enable() = 0;
-
-   virtual void pullup_disable() = 0;
-
 };
    
 //===============================input port================================
@@ -143,10 +135,6 @@ public:
    virtual uint_fast16_t read() = 0; 
 
    virtual void refresh() = 0;
-
-   virtual void pullup_enable() = 0
-
-   virtual void pullup_disable() = 0;
 
 };
 
@@ -267,8 +255,6 @@ public:
    void refresh() override {}
    void write(bool v) override {}
    void flush() override {}
-   void pullup_enable() override {}
-   void pullup_disable() override {}
 };
 
 ///pin_in_out implementation for remote Arduino Due
@@ -375,24 +361,6 @@ public:
       selectPin();
    }
 
-   ///\brief enables the pullup
-   ///\details enables the weak pullup resistor on the pin
-   void pullup_enable() override {
-      sendStartByte();
-      selectClass();
-      serialPort.writeChar('8', 1);
-      selectPin();
-   }
-
-   ///\brief disables the pullup
-   ///\details disables the weak pullup resistor on the pin
-   void pullup_disable() override {
-      sendStartByte();
-      selectClass();
-      serialPort.writeChar('9', 1);
-      selectPin();
-   }
-
 };
 
 //===============================pin_out================================
@@ -478,14 +446,6 @@ public:
    ///\brief refreshes value on the pin
    ///\details refreshes value on the pin
    void refresh() override {}
-
-   ///\brief enables the pullup
-   ///\details enables the weak pullup resistor on the pin
-   void pullup_enable() override {}
-
-   ///\brief disables the pullup
-   ///\details disables the weak pullup resistor on the pin
-   void pullup_disable() override {}
 };
 
 ///pin_in implementation for remote Arduino Due
@@ -536,24 +496,6 @@ public:
       sendStartByte();
       selectClass();
       serialPort.writeChar('6', 1);
-      selectPin();
-   }
-
-   ///\brief enables the pullup
-   ///\details enables the weak pullup resistor on the pin
-   void pullup_enable() override {
-      sendStartByte();
-      selectClass();
-      serialPort.writeChar('8', 1);
-      selectPin();
-   }
-
-   ///\brief disables the pullup
-   ///\details disables the weak pullup resistor on the pin
-   void pullup_disable() override {
-      sendStartByte();
-      selectClass();
-      serialPort.writeChar('9', 1);
       selectPin();
    }
 };
