@@ -165,6 +165,7 @@ public:
 //
 //======================================================================
 
+///namespace due_remote contains all implemented classes for Arduino Due
 namespace due_remote{
 
 ///function to make the program sync with Arduino Due at startup
@@ -193,7 +194,6 @@ void waitForStartSignal(){
 /// SCL, SDA, TX (=D1), RX (=D0), 
 /// LED (=D13), SCK (=D13), MISO (=D12), MOSI (=D11), SS (=D10).
 
-enum class pins {
 enum pins : uint8_t {
    d0, d1, d2, d3, d4, d5, d6, d7, d8, d9,
    d10, d11, d12, d13, d14, d15, d16, d17, d18, d19,
