@@ -117,13 +117,11 @@ Inheritance diagram for due_remote::pin_out:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abf1b8b86f258165800997469adb804d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__out.html#abf1b8b86f258165800997469adb804d0">pin_out</a> (<a class="el" href="namespacedue__remote.html#a286b24e23f235bcd7d4571141d45a724">pins</a> ENUMber)</td></tr>
 <tr class="separator:abf1b8b86f258165800997469adb804d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac304e2589d6d6d56ea89a373ca784dfa"><td class="memItemLeft" align="right" valign="top"><a id="ac304e2589d6d6d56ea89a373ca784dfa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__out.html#ac304e2589d6d6d56ea89a373ca784dfa">write</a> (bool v) override</td></tr>
-<tr class="memdesc:ac304e2589d6d6d56ea89a373ca784dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes given bool value to pin <br /></td></tr>
+<tr class="memitem:ac304e2589d6d6d56ea89a373ca784dfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__out.html#ac304e2589d6d6d56ea89a373ca784dfa">write</a> (bool v) override</td></tr>
+<tr class="memdesc:ac304e2589d6d6d56ea89a373ca784dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes bool v to pin  <a href="#ac304e2589d6d6d56ea89a373ca784dfa">More...</a><br /></td></tr>
 <tr class="separator:ac304e2589d6d6d56ea89a373ca784dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0001fad3358e4a2206072896de7e0906"><td class="memItemLeft" align="right" valign="top"><a id="a0001fad3358e4a2206072896de7e0906"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__out.html#a0001fad3358e4a2206072896de7e0906">flush</a> () override</td></tr>
-<tr class="memdesc:a0001fad3358e4a2206072896de7e0906"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes most recently written value onto the pin <br /></td></tr>
+<tr class="memitem:a0001fad3358e4a2206072896de7e0906"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__out.html#a0001fad3358e4a2206072896de7e0906">flush</a> () override</td></tr>
+<tr class="memdesc:a0001fad3358e4a2206072896de7e0906"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes the pin  <a href="#a0001fad3358e4a2206072896de7e0906">More...</a><br /></td></tr>
 <tr class="separator:a0001fad3358e4a2206072896de7e0906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -158,6 +156,68 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0001fad3358e4a2206072896de7e0906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0001fad3358e4a2206072896de7e0906">&#9670;&nbsp;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::pin_out::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>flushes the pin </p>
+<p>flushes the pin to make it output the signal last written to it </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__out.html">due_remote_primitives::pin_out</a>.</p>
+
+</div>
+</div>
+<a id="ac304e2589d6d6d56ea89a373ca784dfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac304e2589d6d6d56ea89a373ca784dfa">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::pin_out::write </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>writes bool v to pin </p>
+<p>writes the given bool value to the pin which will be outputted after <a class="el" href="classdue__remote_1_1pin__out.html#a0001fad3358e4a2206072896de7e0906" title="flushes the pin ">flush()</a> is called, this function will change the pin to output if previously set to input </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__out.html">due_remote_primitives::pin_out</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="hwlib-arduino-due-remote_8hpp_source.html">hwlib-arduino-due-remote.hpp</a></li>
 </ul>
@@ -167,7 +227,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote.html">due_remote</a></li><li class="navelem"><a class="el" href="classdue__remote_1_1pin__out.html">pin_out</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 13:08:37 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 13:55:56 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

@@ -23,12 +23,12 @@ var hierarchy =
       [ "due_remote::pin_out_dummy", "classdue__remote_1_1pin__out__dummy.html", null ]
     ] ],
     [ "due_remote_primitives::port_in", "classdue__remote__primitives_1_1port__in.html", [
-      [ "due_remote::port_in_from_pins_t", "classdue__remote_1_1port__in__from__pins__t.html", null ]
+      [ "port_in_from_pins_t", "classport__in__from__pins__t.html", null ]
     ] ],
     [ "due_remote_primitives::port_in_out", "classdue__remote__primitives_1_1port__in__out.html", [
-      [ "due_remote::port_in_out_from_pins_t", "classdue__remote_1_1port__in__out__from__pins__t.html", null ]
+      [ "port_in_out_from_pins_t", "classport__in__out__from__pins__t.html", null ]
     ] ],
     [ "due_remote_primitives::port_out", "classdue__remote__primitives_1_1port__out.html", [
-      [ "due_remote::port_out_from_pins_t", "classdue__remote_1_1port__out__from__pins__t.html", null ]
+      [ "port_out_from_pins_t", "classport__out__from__pins__t.html", null ]
     ] ]
 ];

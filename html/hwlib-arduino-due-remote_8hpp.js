@@ -20,9 +20,9 @@ var hwlib_arduino_due_remote_8hpp =
     [ "pin_adc", "classdue__remote_1_1pin__adc.html", "classdue__remote_1_1pin__adc" ],
     [ "all_from_pin_out_t", "classdue__remote_1_1all__from__pin__out__t.html", "classdue__remote_1_1all__from__pin__out__t" ],
     [ "all_from_port_out_t", "classdue__remote_1_1all__from__port__out__t.html", "classdue__remote_1_1all__from__port__out__t" ],
-    [ "port_in_out_from_pins_t", "classdue__remote_1_1port__in__out__from__pins__t.html", "classdue__remote_1_1port__in__out__from__pins__t" ],
-    [ "port_out_from_pins_t", "classdue__remote_1_1port__out__from__pins__t.html", "classdue__remote_1_1port__out__from__pins__t" ],
-    [ "port_in_from_pins_t", "classdue__remote_1_1port__in__from__pins__t.html", "classdue__remote_1_1port__in__from__pins__t" ],
+    [ "port_in_out_from_pins_t", "classport__in__out__from__pins__t.html", "classport__in__out__from__pins__t" ],
+    [ "port_out_from_pins_t", "classport__out__from__pins__t.html", "classport__out__from__pins__t" ],
+    [ "port_in_from_pins_t", "classport__in__from__pins__t.html", "classport__in__from__pins__t" ],
     [ "adc_pins", "hwlib-arduino-due-remote_8hpp.html#a48634feb9877d9a5be44a6d32de0a1a8", [
       [ "ad0", "hwlib-arduino-due-remote_8hpp.html#a48634feb9877d9a5be44a6d32de0a1a8ada2ab5648a6f563e16ba4224cd947c0b", null ],
       [ "ad1", "hwlib-arduino-due-remote_8hpp.html#a48634feb9877d9a5be44a6d32de0a1a8af33151a725e4f95414f16c067edcc387", null ],
@@ -126,8 +126,8 @@ var hwlib_arduino_due_remote_8hpp =
       [ "dummy_out", "hwlib-arduino-due-remote_8hpp.html#a286b24e23f235bcd7d4571141d45a724a8f441143f9f03e3b7e9ad47be1c3a725", null ]
     ] ],
     [ "serialPort", "hwlib-arduino-due-remote_8hpp.html#a03aa582eee84f03fba99d5bc258e92d4", null ],
-    [ "uart_getc", "hwlib-arduino-due-remote_8hpp.html#aec76b79be5d31080894a757f7abfaa7a", null ],
-    [ "uart_putc", "hwlib-arduino-due-remote_8hpp.html#a19504978fc2572d40e2e2d33b64a049e", null ],
+    [ "uart_getc", "hwlib-arduino-due-remote_8hpp.html#a11508a3c55df6779452e795b23f2af40", null ],
+    [ "uart_putc", "hwlib-arduino-due-remote_8hpp.html#a7a9434a4127001e9617291149b16a526", null ],
     [ "waitForStartSignal", "hwlib-arduino-due-remote_8hpp.html#ac533b9195e9db57c851500e68ced657d", null ],
     [ "in_in_dummy", "hwlib-arduino-due-remote_8hpp.html#a078d788cec87c3df86d461f530a5590a", null ],
     [ "in_in_out_dummy", "hwlib-arduino-due-remote_8hpp.html#a0ade3efe1a7b07d1bb5d998f3b6d64ee", null ],

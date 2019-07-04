@@ -12,9 +12,9 @@ var searchData=
   ['pin_5fout_5fdummy',['pin_out_dummy',['../classdue__remote_1_1pin__out__dummy.html',1,'due_remote']]],
   ['pins',['pins',['../namespacedue__remote.html#a286b24e23f235bcd7d4571141d45a724',1,'due_remote']]],
   ['port_5fin',['port_in',['../classdue__remote__primitives_1_1port__in.html',1,'due_remote_primitives']]],
-  ['port_5fin_5ffrom_5fpins_5ft',['port_in_from_pins_t',['../classdue__remote_1_1port__in__from__pins__t.html',1,'due_remote::port_in_from_pins_t'],['../classdue__remote_1_1port__in__from__pins__t.html#a0c41bd7a1430ca3f7b22ce30339f0dda',1,'due_remote::port_in_from_pins_t::port_in_from_pins_t()']]],
+  ['port_5fin_5ffrom_5fpins_5ft',['port_in_from_pins_t',['../classport__in__from__pins__t.html',1,'port_in_from_pins_t'],['../classport__in__from__pins__t.html#a5864bdfd96434ce17014c24dee561312',1,'port_in_from_pins_t::port_in_from_pins_t()']]],
   ['port_5fin_5fout',['port_in_out',['../classdue__remote__primitives_1_1port__in__out.html',1,'due_remote_primitives']]],
-  ['port_5fin_5fout_5ffrom_5fpins_5ft',['port_in_out_from_pins_t',['../classdue__remote_1_1port__in__out__from__pins__t.html',1,'due_remote::port_in_out_from_pins_t'],['../classdue__remote_1_1port__in__out__from__pins__t.html#a83c49da39af6e0d35e37b078a3fa17f4',1,'due_remote::port_in_out_from_pins_t::port_in_out_from_pins_t()']]],
+  ['port_5fin_5fout_5ffrom_5fpins_5ft',['port_in_out_from_pins_t',['../classport__in__out__from__pins__t.html',1,'port_in_out_from_pins_t'],['../classport__in__out__from__pins__t.html#a9d09f7c20286ad5949b960f4e0cdaab3',1,'port_in_out_from_pins_t::port_in_out_from_pins_t()']]],
   ['port_5fout',['port_out',['../classdue__remote__primitives_1_1port__out.html',1,'due_remote_primitives']]],
-  ['port_5fout_5ffrom_5fpins_5ft',['port_out_from_pins_t',['../classdue__remote_1_1port__out__from__pins__t.html',1,'due_remote::port_out_from_pins_t'],['../classdue__remote_1_1port__out__from__pins__t.html#a47a0f225b126ee829122a08a7d2b4ff7',1,'due_remote::port_out_from_pins_t::port_out_from_pins_t()']]]
+  ['port_5fout_5ffrom_5fpins_5ft',['port_out_from_pins_t',['../classport__out__from__pins__t.html',1,'port_out_from_pins_t'],['../classport__out__from__pins__t.html#a5412a208a63f2dcedd0fec4557c19f11',1,'port_out_from_pins_t::port_out_from_pins_t()']]]
 ];

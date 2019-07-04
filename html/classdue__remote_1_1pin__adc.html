@@ -117,13 +117,11 @@ Inheritance diagram for due_remote::pin_adc:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ef191cee265ef10a7736ad97a905048"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__adc.html#a5ef191cee265ef10a7736ad97a905048">pin_adc</a> (<a class="el" href="namespacedue__remote.html#a48634feb9877d9a5be44a6d32de0a1a8">adc_pins</a> ENUMber)</td></tr>
 <tr class="separator:a5ef191cee265ef10a7736ad97a905048"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5231d100c61fe05e71158b2422511500"><td class="memItemLeft" align="right" valign="top"><a id="a5231d100c61fe05e71158b2422511500"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__adc.html#a5231d100c61fe05e71158b2422511500">read</a> () override</td></tr>
-<tr class="memdesc:a5231d100c61fe05e71158b2422511500"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns value on adc pin <br /></td></tr>
+<tr class="memitem:a5231d100c61fe05e71158b2422511500"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__adc.html#a5231d100c61fe05e71158b2422511500">read</a> () override</td></tr>
+<tr class="memdesc:a5231d100c61fe05e71158b2422511500"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns value on adc pin  <a href="#a5231d100c61fe05e71158b2422511500">More...</a><br /></td></tr>
 <tr class="separator:a5231d100c61fe05e71158b2422511500"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a203fe5a36e420683273e889c0e35300c"><td class="memItemLeft" align="right" valign="top"><a id="a203fe5a36e420683273e889c0e35300c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__adc.html#a203fe5a36e420683273e889c0e35300c">refresh</a> () override</td></tr>
-<tr class="memdesc:a203fe5a36e420683273e889c0e35300c"><td class="mdescLeft">&#160;</td><td class="mdescRight">refreshes value on adc pin <br /></td></tr>
+<tr class="memitem:a203fe5a36e420683273e889c0e35300c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__adc.html#a203fe5a36e420683273e889c0e35300c">refresh</a> () override</td></tr>
+<tr class="memdesc:a203fe5a36e420683273e889c0e35300c"><td class="mdescLeft">&#160;</td><td class="mdescRight">refreshes adc pin  <a href="#a203fe5a36e420683273e889c0e35300c">More...</a><br /></td></tr>
 <tr class="separator:a203fe5a36e420683273e889c0e35300c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -158,6 +156,67 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5231d100c61fe05e71158b2422511500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5231d100c61fe05e71158b2422511500">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t due_remote::pin_adc::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns value on adc pin </p>
+<p>returns uint16_t with value inbetween 0 and 4096, currently not functional </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__adc.html">due_remote_primitives::pin_adc</a>.</p>
+
+</div>
+</div>
+<a id="a203fe5a36e420683273e889c0e35300c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a203fe5a36e420683273e889c0e35300c">&#9670;&nbsp;</a></span>refresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::pin_adc::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>refreshes adc pin </p>
+<p>redhreshes value returned by read to current value read on pin </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__adc.html">due_remote_primitives::pin_adc</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="hwlib-arduino-due-remote_8hpp_source.html">hwlib-arduino-due-remote.hpp</a></li>
 </ul>
@@ -167,7 +226,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote.html">due_remote</a></li><li class="navelem"><a class="el" href="classdue__remote_1_1pin__adc.html">pin_adc</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 13:08:37 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 13:55:55 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
