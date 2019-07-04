@@ -5,7 +5,7 @@
 namespace due = due_remote;
 
 int main(){
-    auto pin0 = due::pin_out_dummy(due::pins::d52);
+    auto pin0 = due::pin_out_dummy();
 
     due_remote::waitForStartSignal();
     
