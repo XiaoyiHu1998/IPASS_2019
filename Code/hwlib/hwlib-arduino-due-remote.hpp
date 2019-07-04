@@ -230,7 +230,7 @@ enum adc_pins : uint8_t{
 
 //========================adc_data data-type============================
 
-//Union datatype used for data transfer from Arduino to PC for pin_adc.read()
+//Union datatype used for data transfer from Arduino to PC for pin_adc.read() contains uint8_t uint8[2] array and uint16_t uint16
 union adc_data{
     uint8_t uint8[2];
     uint16_t uint16;
@@ -289,7 +289,7 @@ public:
                         number = ENUMber;
                         }
 
-   ///\brief sets direction of pin to output
+   ///\brief sets pin to output
    ///\details sets direction of pin to turn it into an output pins
    void direction_set_output() override{
       sendStartByte();
@@ -298,7 +298,7 @@ public:
       selectPin();
    }
    
-   ///\brief sets direction of pin to input
+   ///\brief sets pin to input
    ///\details sets direction of pin to turn it into an input pin
    void direction_set_input() override{
       sendStartByte();
@@ -307,7 +307,7 @@ public:
       selectPin();
    }
 
-   ///\brief flushes pin direction to pin
+   ///\brief flushes pin direction
    ///\details changes value of signal comming out of the pin to the value most recently written to it
    void direction_flush() override{
       sendStartByte();
@@ -316,7 +316,7 @@ public:
       selectPin();
    }
    
-   ///\brief returns value on the pin, changes direction of pin if necessary
+   ///\brief returns value on the pin
    ///\details returns value recieved form when the pin was last refreshed, will change direction if pin is set to output before read is called
    bool read() override{
       sendStartByte();
@@ -336,7 +336,7 @@ public:
       selectPin();
    }
 
-   ///\brief writes given bool value to pin, changes direction of pin if necessary
+   ///\brief writes bool v to pin
    ///\details writes the given bool value to the pin which will be outputted after flush() is called, this function will change the pin to output if previously set to input
    void write(bool v) override{
       sendStartByte();
@@ -352,7 +352,7 @@ public:
       }
    }
 
-   ///\brief flushes most recent written value onto the pin
+   ///\brief flushes the pin
    ///\details flushes the pin to make it output the signal last written to it
    void flush() override{
       sendStartByte();
@@ -408,8 +408,8 @@ public:
                         number = ENUMber;
                         }
 
-   ///\brief writes given bool value to pin
-   ///\details writes the given bool value to the pin which will be outputted after flush() is called
+   ///\brief writes bool v to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called, this function will change the pin to output if previously set to input
    void write(bool v) override{
       sendStartByte();
       selectClass();
@@ -424,7 +424,7 @@ public:
       }
    }
 
-   ///\brief flushes most recently written value onto the pin
+   ///\brief flushes the pin
    ///\details flushes the pin to make it output the signal last written to it
    void flush() override {
       sendStartByte();
@@ -490,7 +490,7 @@ public:
       
    }
 
-   ///\brief refreshes pin value to current value on the input pin
+   ///\brief refreshes the input pin
    ///\details refreshes the value returned by pin to the current signal value on the pin
    void refresh() override{
       sendStartByte();
@@ -580,7 +580,7 @@ public:
       return reading.uint16;
    }
 
-   ///\brief refreshes value on adc pin
+   ///\brief refreshes adc pin
    ///\details redhreshes value returned by read to current value read on pin
    void refresh() override{
       sendStartByte();
@@ -649,6 +649,7 @@ public:
                      {}
    
    ///\brief writes given bool value to all pins
+   ///\details writes given value to all pins in object
    void write(bool v) override{
       for(auto & pin : pins){
          pin->write(v);
@@ -656,6 +657,7 @@ public:
    }
 
    ///\brief flushes most recently written value to all pins
+   ///\flushes pins most recently written value to all pins in object
    void flush() override{
       for (auto & pin : pins){
          pin->flush();
@@ -684,13 +686,13 @@ public:
                      {}
    
    ///\brief writes given value to all pins on the port
+   ///\details writes given value to all pins on port in object
    void write(bool v) override{
       slave.write( v ? 0xFF : 0x0 );
    }
 
    ///\brief writes most recently written value all pins on the port
-   void flush() override{
-      slave.flush();
+   ///\flushes pins most recently written value to all pins on port in object
    }
 };
 
@@ -718,7 +720,7 @@ public:
    /// 
    /// Constructor for a remote Arduino port_in_out_from_pins_t port
    ///
-   /// Takes a set of max 16 pin_in_outs, and makes them adressable as a port
+   /// Takes a set of max 16 pin_in_outs, and makes them adressable as a prt
 
    port_in_out_from_pins_t(
                               due_remote_primitives::pin_in_out & p0 = in_in_out_dummy,
@@ -756,18 +758,21 @@ public:
                            }
 
    ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
    
    ///\brief sets direction of pin_in_outs of the port to input
+   ///\detials sets direction of all pins_outs of the port to input
    void direction_set_input() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_set_input();
       }
    } 
    
-   ///\brief returns uint_fast16_t value with each bit representing the input value on the pins connected to port, changes pin direction if necesarry
+   ///\brief returns uint_fast16_t value
+   ///\details returns uint_fast16_t value with each bit representing the input value on the pins connected to port, changes pin direction if necesarry
    uint_fast16_t read() override{
       uint_fast8_t result = 0;
       for(uint_fast8_t i = _number_of_pins - 1; i >= 0; --i){
@@ -780,6 +785,7 @@ public:
       return result;
    }         
    
+   ///\brief refreshes pins of the port
    ///\brief refreshes values read on the pins of the port
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
@@ -788,12 +794,14 @@ public:
    }  
 
    ///\sets direction of pin_in_outs of the port to ouput
+   ///\detials sets direction of all pins_outs of the port to output
    void direction_set_output() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_set_output();
       }
    }
    
+   ///\brief writes given uint_fast16_t
    ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
    void write( uint_fast16_t x ) override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
@@ -802,6 +810,7 @@ public:
       }
    }      
    
+   ///\brief flushes pins of the port
    ///\brief flushes most recent written values to pins of the port
    void flush() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
@@ -809,6 +818,7 @@ public:
       }
    }   
    
+   ///\brief flushes  pins of the port
    ///\brief flushes most recently given direction to the pins of the port
    void direction_flush()  override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
@@ -872,11 +882,13 @@ public:
                      }
 
    ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
 
-   ///\brief writes given uint_fast16_t value onto the pins of the port
+   ///\brief writes given uint_fast16_t
+   ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
    void write( uint_fast16_t x ) override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->write((x & 0x01) != 0);
@@ -884,7 +896,8 @@ public:
       }
    }      
    
-   ///\brief flushes most recently given direction to the pins of the port
+   ///\brief flushes pins of the port
+   ///\brief flushes most recent written values to pins of the port
    void flush() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->flush();
@@ -947,11 +960,13 @@ public:
                      }
 
    ///\brief returns the number of pins in the port
+   ///\details returns uint_fast8_t that is equal to amount of pins put into port
    uint_fast8_t number_of_pins() override{
       return _number_of_pins;
    }
    
-   ///\brief returns uint_fast16_t value with each bit representing the input value on the pins connected to port
+   ///\brief writes given uint_fast16_t
+   ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
    uint_fast16_t read() override{
       uint_fast8_t result = 0;
       for(uint_fast8_t i = _number_of_pins - 1; i >= 0; --i){
@@ -964,6 +979,7 @@ public:
       return result;
    }         
    
+   ///\brief refreshes pins of the port
    ///\brief refreshes values read on the pins of the port
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
