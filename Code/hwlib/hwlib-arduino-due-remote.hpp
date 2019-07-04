@@ -657,7 +657,7 @@ public:
    }
 
    ///\brief flushes most recently written value to all pins
-   ///\flushes pins most recently written value to all pins in object
+   ///\details flushes pins most recently written value to all pins in object
    void flush() override{
       for (auto & pin : pins){
          pin->flush();
@@ -692,7 +692,7 @@ public:
    }
 
    ///\brief writes most recently written value all pins on the port
-   ///\flushes pins most recently written value to all pins on port in object
+   ///\details flushes pins most recently written value to all pins on port in object
    void flush() override{
       slave.flush();
    }
@@ -968,7 +968,7 @@ public:
    }
    
    ///\brief writes given uint_fast16_t
-   ///\brief writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
+   ///\details writes given uint_fast16_t value onto the pins of the port, changes pin direction if necesarry
    uint_fast16_t read() override{
       uint_fast8_t result = 0;
       for(uint_fast8_t i = _number_of_pins - 1; i >= 0; --i){
@@ -982,7 +982,7 @@ public:
    }         
    
    ///\brief refreshes pins of the port
-   ///\brief refreshes values read on the pins of the port
+   ///\details refreshes values read on the pins of the port
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->refresh();
