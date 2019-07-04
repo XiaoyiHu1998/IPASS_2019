@@ -11,9 +11,9 @@ var searchData=
   ['pin_5fout',['pin_out',['../classdue__remote__primitives_1_1pin__out.html',1,'due_remote_primitives::pin_out'],['../classdue__remote_1_1pin__out.html',1,'due_remote::pin_out']]],
   ['pin_5fout_5fdummy',['pin_out_dummy',['../classdue__remote_1_1pin__out__dummy.html',1,'due_remote']]],
   ['port_5fin',['port_in',['../classdue__remote__primitives_1_1port__in.html',1,'due_remote_primitives']]],
-  ['port_5fin_5ffrom_5fpins_5ft',['port_in_from_pins_t',['../classport__in__from__pins__t.html',1,'']]],
+  ['port_5fin_5ffrom_5fpins_5ft',['port_in_from_pins_t',['../classdue__remote_1_1port__in__from__pins__t.html',1,'due_remote']]],
   ['port_5fin_5fout',['port_in_out',['../classdue__remote__primitives_1_1port__in__out.html',1,'due_remote_primitives']]],
-  ['port_5fin_5fout_5ffrom_5fpins_5ft',['port_in_out_from_pins_t',['../classport__in__out__from__pins__t.html',1,'']]],
+  ['port_5fin_5fout_5ffrom_5fpins_5ft',['port_in_out_from_pins_t',['../classdue__remote_1_1port__in__out__from__pins__t.html',1,'due_remote']]],
   ['port_5fout',['port_out',['../classdue__remote__primitives_1_1port__out.html',1,'due_remote_primitives']]],
-  ['port_5fout_5ffrom_5fpins_5ft',['port_out_from_pins_t',['../classport__out__from__pins__t.html',1,'']]]
+  ['port_5fout_5ffrom_5fpins_5ft',['port_out_from_pins_t',['../classdue__remote_1_1port__out__from__pins__t.html',1,'due_remote']]]
 ];

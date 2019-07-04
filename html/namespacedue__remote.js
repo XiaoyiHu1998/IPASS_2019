@@ -11,5 +11,8 @@ var namespacedue__remote =
     [ "pin_in_out_dummy", "classdue__remote_1_1pin__in__out__dummy.html", "classdue__remote_1_1pin__in__out__dummy" ],
     [ "pin_oc_dummy", "classdue__remote_1_1pin__oc__dummy.html", "classdue__remote_1_1pin__oc__dummy" ],
     [ "pin_out", "classdue__remote_1_1pin__out.html", "classdue__remote_1_1pin__out" ],
-    [ "pin_out_dummy", "classdue__remote_1_1pin__out__dummy.html", "classdue__remote_1_1pin__out__dummy" ]
+    [ "pin_out_dummy", "classdue__remote_1_1pin__out__dummy.html", "classdue__remote_1_1pin__out__dummy" ],
+    [ "port_in_from_pins_t", "classdue__remote_1_1port__in__from__pins__t.html", "classdue__remote_1_1port__in__from__pins__t" ],
+    [ "port_in_out_from_pins_t", "classdue__remote_1_1port__in__out__from__pins__t.html", "classdue__remote_1_1port__in__out__from__pins__t" ],
+    [ "port_out_from_pins_t", "classdue__remote_1_1port__out__from__pins__t.html", "classdue__remote_1_1port__out__from__pins__t" ]
 ];
