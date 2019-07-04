@@ -58,7 +58,7 @@ serialPort_linux serialPort(path); //path for serialport declared in serialPort_
 ///namespace due_remote_primitives contains abstract classes for due_remote classes
 namespace due_remote_primitives{
 
-///abstract class for pin_in_out
+///\brief abstract class for pin_in_out
 class pin_in_out{
 public:
    virtual void direction_set_output() = 0;
@@ -187,8 +187,8 @@ void waitForStartSignal(){
 //
 //======================================================================
 
-/// Arduino Due GPIO pin names
-/// 
+///Arduino Due GPIO pin names
+///
 /// These are the pins of an Arduino Due board.
 /// Digital pins d0..d13, analog input pins A0..A5, 
 /// SCL, SDA, TX (=D1), RX (=D0), 
@@ -219,7 +219,7 @@ enum pins : uint8_t {
    /// \endcond   
 };
 
-/// Arduino Due pin names
+///Arduino Due pin names
 /// 
 /// These are the ADC pins of an Arduino Due board.
 enum adc_pins : uint8_t{
@@ -290,6 +290,7 @@ public:
                         }
 
    ///\brief sets direction of pin to output
+   ///\details sets direction of pin to turn it into an output pins
    void direction_set_output() override{
       sendStartByte();
       selectClass();
@@ -298,6 +299,7 @@ public:
    }
    
    ///\brief sets direction of pin to input
+   ///\details sets direction of pin to turn it into an input pin
    void direction_set_input() override{
       sendStartByte();
       selectClass();
@@ -306,6 +308,7 @@ public:
    }
 
    ///\brief flushes pin direction to pin
+   ///\details changes value of signal comming out of the pin to the value most recently written to it
    void direction_flush() override{
       sendStartByte();
       selectClass();
@@ -314,6 +317,7 @@ public:
    }
    
    ///\brief returns value on the pin, changes direction of pin if necessary
+   ///\details returns value recieved form when the pin was last refreshed, will change direction if pin is set to output before read is called
    bool read() override{
       sendStartByte();
       selectClass();
@@ -324,6 +328,7 @@ public:
    }
 
    ///\brief refreshes the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    void refresh() override{
       sendStartByte();
       selectClass();
@@ -332,6 +337,7 @@ public:
    }
 
    ///\brief writes given bool value to pin, changes direction of pin if necessary
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called, this function will change the pin to output if previously set to input
    void write(bool v) override{
       sendStartByte();
       selectClass();
@@ -347,6 +353,7 @@ public:
    }
 
    ///\brief flushes most recent written value onto the pin
+   ///\details flushes the pin to make it output the signal last written to it
    void flush() override{
       sendStartByte();
       selectClass();
@@ -362,9 +369,11 @@ public:
 class pin_out_dummy : public due_remote_primitives::pin_out{
 public:
    ///\brief writes 0 to pin
+   ///\details writes 0 to pin
    virtual void write(bool v) override {}
 
    ///\brief flushes most recent written value onto the pin
+   ///\flushes the pin to make it output the last value written to it
    virtual void flush() override {}
 };
 
@@ -400,6 +409,7 @@ public:
                         }
 
    ///\brief writes given bool value to pin
+   ///\details writes the given bool value to the pin which will be outputted after flush() is called
    void write(bool v) override{
       sendStartByte();
       selectClass();
@@ -415,6 +425,7 @@ public:
    }
 
    ///\brief flushes most recently written value onto the pin
+   ///\details flushes the pin to make it output the signal last written to it
    void flush() override {
       sendStartByte();
       selectClass();
@@ -428,10 +439,12 @@ public:
 ///pin_in_dummy implementation for remote Arduino Due, always reads 0
 class pin_in_dummy : public due_remote_primitives::pin_in{
 public:
-   //\brief always returns 0
+   ///\brief always returns 0
+   ///\details returns 0
    virtual bool read(){return 0;}
 
-   //\brief refreshes value on the input pin
+   ///\brief refreshes value on the pin
+   ///\details refreshes value on the pin
    virtual void refresh(){}
 };
 
@@ -467,6 +480,7 @@ public:
                         }
 
    ///\brief returns value on the pin
+   ///\details returns value recieved form when the pin was last refreshed, will change direction if pin is set to output before read is called
    bool read() override{
       sendStartByte();
       selectClass();
@@ -477,6 +491,7 @@ public:
    }
 
    ///\brief refreshes pin value to current value on the input pin
+   ///\details refreshes the value returned by pin to the current signal value on the pin
    void refresh() override{
       sendStartByte();
       selectClass();
@@ -491,15 +506,19 @@ public:
 class pin_oc_dummy : public due_remote_primitives::pin_oc{
 public:
 ///\brief always returns 0
+///\details always returns 0
    bool read() override {return 0;}
 
 ///\brief writes 0 to pin
+///\details writes 0 to pin
    void write(bool v) override {}
 
-///\brief flushes newest value to pin
+///\details flushes value 0 to pin
+///\details flushes value 0 to pin
    void flush() override {}
 
-///\brief reads most recent value on pin
+///\details reads value 0 on pin
+///\details reads value 0 on pin
    void refresh() override{}
 };
 
@@ -508,7 +527,12 @@ public:
 ///pin_adc_dummy implementation for remote Arduino Due, always reads and writes 0
 class pin_adc_dummy : due_remote_primitives::pin_adc{
 public:
+   ///\brief returns 0
+   ///\details reutnrs 0
    uint16_t read() override {return 0;}
+
+   ///\brief refreshes value on pin to 0
+   ///\details refreshes value on pin to 0
    void refresh() override {}
 };
 
@@ -544,6 +568,7 @@ public:
    }
 
    ///\brief returns value on adc pin
+   ///\details returns uint16_t with value inbetween 0 and 4096, currently not functional
    uint16_t read() override{
       sendStartByte();
       selectClass();
@@ -553,16 +578,15 @@ public:
       reading.uint8[0] = static_cast<uint8_t>(serialPort.readChar());
       reading.uint8[1] = static_cast<uint8_t>(serialPort.readChar());
       return reading.uint16;
-      // sendEndByte();
    }
 
    ///\brief refreshes value on adc pin
+   ///\details redhreshes value returned by read to current value read on pin
    void refresh() override{
       sendStartByte();
       selectClass();
       serialPort.writeChar('2', 1);
       selectPin();
-      // sendEndByte();
    }
 };
 
