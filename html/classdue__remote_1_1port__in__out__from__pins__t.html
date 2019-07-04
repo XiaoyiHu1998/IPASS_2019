@@ -141,6 +141,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a5f375a08449641ca1f0754809d300699"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1port__in__out__from__pins__t.html#a5f375a08449641ca1f0754809d300699">direction_flush</a> () override</td></tr>
 <tr class="memdesc:a5f375a08449641ca1f0754809d300699"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes pins of the port  <a href="#a5f375a08449641ca1f0754809d300699">More...</a><br /></td></tr>
 <tr class="separator:a5f375a08449641ca1f0754809d300699"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282c6985e39c2c705aae006010fd57ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1port__in__out__from__pins__t.html#a282c6985e39c2c705aae006010fd57ff">pullup_enable</a> () override</td></tr>
+<tr class="memdesc:a282c6985e39c2c705aae006010fd57ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">enables pullup on port  <a href="#a282c6985e39c2c705aae006010fd57ff">More...</a><br /></td></tr>
+<tr class="separator:a282c6985e39c2c705aae006010fd57ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67077cb582f701ccbc1b84249c86e76d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1port__in__out__from__pins__t.html#a67077cb582f701ccbc1b84249c86e76d">pullup_disable</a> () override</td></tr>
+<tr class="memdesc:a67077cb582f701ccbc1b84249c86e76d"><td class="mdescLeft">&#160;</td><td class="mdescRight">disables pullup on port  <a href="#a67077cb582f701ccbc1b84249c86e76d">More...</a><br /></td></tr>
+<tr class="separator:a67077cb582f701ccbc1b84249c86e76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>implementation of <a class="el" href="classdue__remote_1_1port__in__out__from__pins__t.html" title="implementation of port_in_out_from_pins_t for remote Arduino Due ">port_in_out_from_pins_t</a> for remote Arduino Due </p>
@@ -387,6 +393,66 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
+<a id="a67077cb582f701ccbc1b84249c86e76d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67077cb582f701ccbc1b84249c86e76d">&#9670;&nbsp;</a></span>pullup_disable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::port_in_out_from_pins_t::pullup_disable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>disables pullup on port </p>
+<p>disables weak pullup resistors on all pins in port object </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1port__in__out.html">due_remote_primitives::port_in_out</a>.</p>
+
+</div>
+</div>
+<a id="a282c6985e39c2c705aae006010fd57ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a282c6985e39c2c705aae006010fd57ff">&#9670;&nbsp;</a></span>pullup_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::port_in_out_from_pins_t::pullup_enable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>enables pullup on port </p>
+<p>enables weak pullup resistors on all pins in port object </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1port__in__out.html">due_remote_primitives::port_in_out</a>.</p>
+
+</div>
+</div>
 <a id="adcf619c0a29993da5fc9d48bdbb7f974"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adcf619c0a29993da5fc9d48bdbb7f974">&#9670;&nbsp;</a></span>read()</h2>
 
@@ -487,7 +553,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote.html">due_remote</a></li><li class="navelem"><a class="el" href="classdue__remote_1_1port__in__out__from__pins__t.html">port_in_out_from_pins_t</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 14:07:38 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 14:34:16 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

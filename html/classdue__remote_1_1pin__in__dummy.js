@@ -1,5 +1,7 @@
 var classdue__remote_1_1pin__in__dummy =
 [
-    [ "read", "classdue__remote_1_1pin__in__dummy.html#a0f4a85c77d61ac15e1eff20a1a515b37", null ],
-    [ "refresh", "classdue__remote_1_1pin__in__dummy.html#abd41d8acc6ce51cc9456b1bd994b9ca3", null ]
+    [ "pullup_disable", "classdue__remote_1_1pin__in__dummy.html#a1e31c0d2c91e7738ee82d02270e7a677", null ],
+    [ "pullup_enable", "classdue__remote_1_1pin__in__dummy.html#a9df2d7d3a671fef6b5bef98fb6dd448f", null ],
+    [ "read", "classdue__remote_1_1pin__in__dummy.html#af9d3c6f9746b9dce530939254883914e", null ],
+    [ "refresh", "classdue__remote_1_1pin__in__dummy.html#aacc979804e4c6c059f382a3c7150b542", null ]
 ];

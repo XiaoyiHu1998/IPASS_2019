@@ -138,6 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a32551b7444014ed655c3502abad2b5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__in__out.html#a32551b7444014ed655c3502abad2b5e3">flush</a> () override</td></tr>
 <tr class="memdesc:a32551b7444014ed655c3502abad2b5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">flushes the pin  <a href="#a32551b7444014ed655c3502abad2b5e3">More...</a><br /></td></tr>
 <tr class="separator:a32551b7444014ed655c3502abad2b5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d80de813a240b6eb751154200be7dec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__in__out.html#a2d80de813a240b6eb751154200be7dec">pullup_enable</a> () override</td></tr>
+<tr class="memdesc:a2d80de813a240b6eb751154200be7dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">enables the pullup  <a href="#a2d80de813a240b6eb751154200be7dec">More...</a><br /></td></tr>
+<tr class="separator:a2d80de813a240b6eb751154200be7dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba2faacac213969dc01b7d9bf948858"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdue__remote_1_1pin__in__out.html#acba2faacac213969dc01b7d9bf948858">pullup_disable</a> () override</td></tr>
+<tr class="memdesc:acba2faacac213969dc01b7d9bf948858"><td class="mdescLeft">&#160;</td><td class="mdescRight">disables the pullup  <a href="#acba2faacac213969dc01b7d9bf948858">More...</a><br /></td></tr>
+<tr class="separator:acba2faacac213969dc01b7d9bf948858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classdue__remote_1_1pin__in__out.html" title="pin_in_out implementation for remote Arduino Due ">pin_in_out</a> implementation for remote Arduino Due </p>
@@ -293,6 +299,66 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="acba2faacac213969dc01b7d9bf948858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba2faacac213969dc01b7d9bf948858">&#9670;&nbsp;</a></span>pullup_disable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::pin_in_out::pullup_disable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>disables the pullup </p>
+<p>disables the weak pullup resistor on the pin </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__in__out.html">due_remote_primitives::pin_in_out</a>.</p>
+
+</div>
+</div>
+<a id="a2d80de813a240b6eb751154200be7dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d80de813a240b6eb751154200be7dec">&#9670;&nbsp;</a></span>pullup_enable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void due_remote::pin_in_out::pullup_enable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>enables the pullup </p>
+<p>enables the weak pullup resistor on the pin </p>
+
+<p>Implements <a class="el" href="classdue__remote__primitives_1_1pin__in__out.html">due_remote_primitives::pin_in_out</a>.</p>
+
+</div>
+</div>
 <a id="a30967ec1de9012fda15117293c32ae2f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a30967ec1de9012fda15117293c32ae2f">&#9670;&nbsp;</a></span>read()</h2>
 
@@ -393,7 +459,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacedue__remote.html">due_remote</a></li><li class="navelem"><a class="el" href="classdue__remote_1_1pin__in__out.html">pin_in_out</a></li>
-    <li class="footer">Generated on Thu Jul 4 2019 14:07:38 for hwlib:remote by
+    <li class="footer">Generated on Thu Jul 4 2019 14:34:16 for hwlib:remote by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
