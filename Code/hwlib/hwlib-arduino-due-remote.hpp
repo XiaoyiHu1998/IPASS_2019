@@ -144,7 +144,7 @@ public:
 
    virtual void refresh() = 0;
 
-   virtual void pullup_enable() = 0;
+   virtual void pullup_enable() = 0
 
    virtual void pullup_disable() = 0;
 
@@ -884,22 +884,6 @@ public:
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->direction_flush();
       }
-   }
-
-   ///\brief enables pullup on port
-   ///\brief enables weak pullup resistors on all pins in port object
-   void pullup_enable()  override{
-      for(uint_fast8_t i = 0; i < _number_of_pins; i++){
-         pins[i]->pullup_enable();
-      }
-   } 
-
-   ///\brief disables pullup on port
-   ///\brief disables weak pullup resistors on all pins in port object
-   void pullup_disable()  override{
-      for(uint_fast8_t i = 0; i < _number_of_pins; i++){
-         pins[i]->pullup_disable();
-      }
    }  
 };
 
@@ -1060,22 +1044,6 @@ public:
    void refresh() override{
       for(uint_fast8_t i = 0; i < _number_of_pins; i++){
          pins[i]->refresh();
-      }
-   }
-
-   ///\brief enables pullup on port
-   ///\brief enables weak pullup resistors on all pins in port object
-   void pullup_enable()  override{
-      for(uint_fast8_t i = 0; i < _number_of_pins; i++){
-         pins[i]->pullup_enable();
-      }
-   } 
-
-   ///\brief disables pullup on port
-   ///\brief disables weak pullup resistors on all pins in port object
-   void pullup_disable() override{
-      for(uint_fast8_t i = 0; i < _number_of_pins; i++){
-         pins[i]->pullup_disable();
       }
    }
 };
